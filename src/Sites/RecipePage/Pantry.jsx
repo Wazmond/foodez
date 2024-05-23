@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import PantrySearch from './Contents/PantrySearch.jsx'
+import PantrySearch from './PantrySearch.jsx'
 
 const PantryContainer = styled.div``;
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components'
-import PantryPage from './Sites/Pantry.jsx'
+import PantryPage from './RecipePage/Pantry.jsx'
 
 const RecipeContainer = styled.div`
     height: 100vh;
