@@ -3,3 +3,18 @@
   margin: 0;
   padding: 0;
 }
+
+@font-face {
+  font-family: Roboto-Regular;
+  src: url(/src/Fonts/Roboto/Roboto-Regular.ttf);
+}
+
+@font-face {
+  font-family: Roboto-Light;
+  src: url(/src/Fonts/Roboto/Roboto-Light.ttf);
+}
+
+@font-face {
+  font-family: Roboto-Thin;
+  src: url(/src/Fonts/Roboto/Roboto-Thin.ttf);
+}
