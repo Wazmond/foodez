@@ -5,7 +5,7 @@ import PantryPage from './RecipePage/Pantry.jsx'
 const RecipeContainer = styled.div`
     height: 100vh;
     width: 100vw;
-    background-color: grey;
+    background-color: #0077ff;
     display: flex;
     justify-content : flex-end;
 `;
@@ -59,7 +59,7 @@ const RecipesPage = styled.div`
 `;
 
 export default function Recipe() {
-    const [isPageDisplaying, setIsPageDisplaying] = useState(true);
+    const [isPageDisplaying, setIsPageDisplaying] = useState();
 
     return(
         <>
@@ -72,7 +72,6 @@ export default function Recipe() {
                 <Page>
                     <PantryPages id="pantry" isPageDisplaying={isPageDisplaying} />
                         <PantryPage />
-
                     <RecipesPage id="recipes" isPageDisplaying={isPageDisplaying}>
                         <h1>Recipes</h1>
                     </RecipesPage>
