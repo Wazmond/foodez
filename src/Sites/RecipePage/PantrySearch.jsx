@@ -1,17 +1,37 @@
 import styled from 'styled-components'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 
 const PantrySearchContainer = styled.div`
-    border: 2px solid red;
     font-size: 20px;
     width: 45%;
     height: 90%;
+    display: flex;
+    flex-direction: column;
+
     h2 {
         text-align: center;
     }
 `;
-const PantrySearchInputBox = styled.input``;
-const PantrySearchResults = styled.ul``;
+const SearchContainer = styled.div`
+    box-shadow: 0 5px 15px #686868;
+    border-radius: 20px;
+    margin: auto 0 0;
+    width: 100%;
+    height: 100%;
+`;
+const DividerLine = styled.div`
+    width: 80%;
+    height: 0px;
+    border: 1px solid grey;
+    margin: 0 auto;
+`;
+const PantrySearchInputBox = styled.input`
+    font-size: 20px;
+    text-align: center;
+    width: 100%;
+    height: 60px;
+    border-radius: 20px;
+    border: none;
 
     &:focus {
         outline: none;
@@ -53,26 +73,31 @@ const PantrySearchResults = styled.label`
 
 `;
 
+function Ing_add() {
+    // add to redux-persist
+}
+
 export default function PantrySearch() {
     const [inputValue, setInputValue] = useState('');
     const [debouncedValue, setDebouncedValue] = useState(inputValue);
-    const [results, setResults] = useState('');
+    const [APIresults, setAPIResults] = useState([]);
 
     useEffect(() => {
         const timeoutHandler = setTimeout(() => {
             setDebouncedValue(inputValue);
-        }, 2000);
-
+        }, 1000);
         return () => {
             clearTimeout(timeoutHandler);
         };
     }, [inputValue]);
 
     useEffect(() => {
-        if(!inputValue == " ") {
-            console.log("FetchData function is running now");
-            FetchData();
-        }
+        debouncedValue == "" ? (setAPIResults([]), 
+                            console.log("APIresults have been set to" + APIresults)
+                        ) : (
+                            FetchData(),
+                            console.log("FetchData function is running now, Input Value is: " + inputValue + "...")
+                        )
     }, [debouncedValue]);
 
     async function FetchData() {
@@ -89,34 +114,34 @@ export default function PantrySearch() {
                 throw new Error("Could not fetch resource")
             }
             data = await response.json();
-            console.log(data)
+            console.log(data);
         } catch(error) {
             console.log(error)
         }
-        setResults(data.results.map((result) => (result)));
+        setAPIResults(data.results);
+        console.log("APIresults set as data.results");
     };
 
     return(
         <>
             <PantrySearchContainer>
-                <h2>Pantry Search</h2>
-                <PantrySearchInputBox id="ing_input" placeholder='Search for items here...' value={inputValue} onChange={(e) => setInputValue(e.target.value)}/>
-                {/* <button onClick={FetchData}>submit</button> */}
-                <ResultContainer>
-                    {results === "" ? (<li>Please enter item into search box to begin.</li>) : (results.length > 0 ? (results.map((result, index) => (<li key={index}>{result.value}</li>))) : (<li>No results found...</li>))}
-                        <li>result 1</li>
-                        <li>result 2</li>
-                        <li>result 3</li>
-                        <li>result 4</li>
-                        <li>result 5</li>
-                        <li>result 6</li>
-                        <li>result 7</li>
-                        <li>result 8</li>
-                        <li>result 9</li>
-                        <li>result 10</li>
-                </ResultContainer>
+                <SearchContainer>
+                    <h2>Ingredient Search</h2>
+
+                    <PantrySearchInputBox id="ing_input" placeholder='Search for items here...' value={inputValue} onChange={(e) => (setInputValue(e.target.value))}/>
+                    <DividerLine />
+                    <ResultContainer>
+                        {APIresults == "" ? 
+                            (<li>Please enter item into search box to begin.</li>) : 
+                            (APIresults.length > 0 ? 
+                                (APIresults.map((result, index) => (
+                                    <SeachResultSpan><PantrySearchResults key={index} onClick={Ing_add} >{result.name}</PantrySearchResults></SeachResultSpan>
+                                ))) : (
+                                    <li>No results found...</li>
+                                ))}
+                    </ResultContainer>
+                </SearchContainer>
             </PantrySearchContainer>
         </>
     );
 };
-

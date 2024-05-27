@@ -5,6 +5,7 @@ import dashboardLogo from '/src/Images/dashboard-logo.svg'
 const SidebarContainer = styled.div`
     width: 15vw;
     min-width: 225px;
+    max-width: 250px;
     height: 100vh;
     background-color: #333333;
     display: flex;
