@@ -59,7 +59,7 @@ const RecipesPage = styled.div`
 `;
 
 export default function Recipe() {
-    const [isPageDisplaying, setIsPageDisplaying] = useState();
+    const [isPageDisplaying, setIsPageDisplaying] = useState(true);
 
     return(
         <>

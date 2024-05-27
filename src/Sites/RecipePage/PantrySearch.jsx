@@ -13,6 +13,45 @@ const PantrySearchContainer = styled.div`
 const PantrySearchInputBox = styled.input``;
 const PantrySearchResults = styled.ul``;
 
+    &:focus {
+        outline: none;
+    }
+`;
+const ResultContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 10px;
+    /* height: 30%; */
+    width: 90%;
+    text-decoration: none;
+    /* border: 2px solid purple; */
+    border-radius: 25px;
+    margin: 0 auto;
+    list-style-type: none;
+
+    color: black;
+    font-family: roboto-regular;
+    font-size: 25px;
+`;
+
+const SeachResultSpan = styled.span`
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+
+    padding-left: 15px;
+
+    &:hover {
+        background-color: lightgrey;
+        border-radius: 5px;
+    }
+    `;
+
+const PantrySearchResults = styled.label`
+
+`;
 
 export default function PantrySearch() {
     const [inputValue, setInputValue] = useState('');
@@ -81,64 +120,3 @@ export default function PantrySearch() {
     );
 };
 
-const ResultContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    overflow: hidden;
-    padding: 10px;
-    height: 30%;
-    width: 90%;
-    text-decoration: none;
-    border: 2px solid purple;
-    border-radius: 25px;
-
-    margin: 0 auto;
-`;
-
-
-
-// async function FetchData() {
-//     const app_id = "8a637636";
-//     const app_key = "ab55b0a95b8f405d140595337a9178f1";
-//     const ingredient = document.getElementById('ing_input').value.toLowerCase();
-//     const searchQty = 3;
-//     console.log(ingredient);
-
-//     let autoData;
-//     try {
-//         const response = await fetch(`https://api.edamam.com/auto-complete?app_id=${app_id}&app_key=${app_key}&q=${ingredient}&limit=${searchQty}`)
-//         if (!response.ok) {
-//             const errorMessage = `Error : ${response.status}`;
-//             throw new Error(errorMessage);
-//         }
-//         autoData = await response.json();
-//         console.log("returning const autoData");
-//         console.log(await autoData);
-//     } catch (error) {
-//         console.log(errorMessage)
-//     };
-//     const autofill = autoData.map((autoData) => (autoData));
-//     console.log("autofill")
-
-//     let foodData;
-//     try {
-//         const response = await fetch(`https://api.edamam.com/api/food-database/v2/parser?app_id=${app_id}&app_key=${app_key}&ingr=${ingredient}`)
-//         if (!response.ok) {
-//             const errorMessage = `Error : ${response.status}`;
-//             throw new Error(errorMessage);
-//         }
-//         foodData = await response.json();
-//         console.log("returning const foodData");
-//         console.log(await foodData);
-//     } catch (error) {
-//         console.log(errorMessage)
-//     };
-//     const foodSearch = foodData.hints.slice(0, 7).map((hints) => (hints.food.knownAs));
-//     console.log("foodsearch");
-//     console.log(foodSearch);
-//     let ArrResults = [...autofill, ...foodSearch];
-//     Results = ArrResults.map(result => result);
-//     console.log('results');
-//     console.log(Results);
-// };
