@@ -64,28 +64,33 @@ const Logo = styled.img`
 
     background-color: white;
 `;
+
+
 function Sidebar() {
-    const reDir = useNavigate();
-    
+    const redirect = useNavigate();
+
     return(
         <SidebarContainer>
             <Brand />
             <NavContainer>
                 <RedirectContainer className="DASHBOARD">
-                    {/* <Logo src={dashboardLogo} /> */}
-                    <Link onClick={() => reDir("dashboard")}>DASHBOARD</Link>
+                    {/* <Logo src={DashboardLogo} /> */}
+                    <Link onClick={() => redirect("Dashboard")} >DASHBOARD</Link>
                 </RedirectContainer>
 
                 <RedirectContainer className="RECIPES">
-                    <Link onClick={() => reDir("recipe")}>RECIPES</Link>
+                    {/* <Logo src={RecipesLogo} /> */}
+                    <Link onClick={() => redirect("Recipe")} >RECIPES</Link>
                 </RedirectContainer>
 
                 <RedirectContainer className="MACROS">
-                    <Link onClick={() => reDir("macros")} >MACROS</Link>
+                    {/* <Logo src={MacrosLogo} /> */}
+                    <Link onClick={() => redirect("Macros")} >MACROS</Link>
                 </RedirectContainer>
 
                 <RedirectContainer className="FITNESS">
-                    <Link onClick={() => reDir("fitness")} >FITNESS</Link>
+                    {/* <Logo src={FitnessLogo} /> */}
+                    <Link onClick={() => redirect("Fitness")} >FITNESS</Link>
                 </RedirectContainer>
             </NavContainer>
         </SidebarContainer>

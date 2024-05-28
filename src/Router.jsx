@@ -11,13 +11,12 @@ import Fitness from './Sites/Fitness'
 
  const router = createBrowserRouter(
     createRoutesFromElements(
-        <Route path="/" element={<Root />}>
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="recipe" element={<Recipe />} />
-            <Route path="macros" element={<Macros />} />
-            <Route path="fitness" element={<Fitness />} />
+        <Route path="/" element={<Root />} >
+          <Route path="Dashboard" element={<Dashboard />} />
+          <Route path="Recipe" element={<Recipe />} />
+          <Route path="Macros" element={<Macros />} />
+          <Route path="Fitness" element={<Fitness />} />
         </Route>
-
     )
  );
- export default router
+ export default router;

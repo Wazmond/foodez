@@ -3,16 +3,24 @@ import Sidebar from './sidebar'
 import styled from 'styled-components'
 
 const Container = styled.div`
-    height: 100%;
-    width: 100%;
+    height: 100vh;
+    width: 100vw;
+`;
+
+const Main = styled.div`
+    height: 100vh;
+    width: 100vw;
 `;
 
 const Root = () => {
     return(
         <Container>
             <Sidebar/>
-            <Outlet />        
+            <Main>
+                <Outlet />
+            </Main>       
         </Container>
     )
 }
+
 export default Root
