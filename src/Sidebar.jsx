@@ -1,6 +1,9 @@
 import styled from "styled-components"
-import react from 'react'
+import { useNavigate } from "react-router-dom"
+
 import dashboardLogo from '/src/Images/dashboard-logo.svg'
+
+
 
 const SidebarContainer = styled.div`
     width: 15vw;
@@ -45,7 +48,7 @@ const RedirectContainer = styled.button`
     }
 `;
 
-const Redirect = styled.nav`
+const Link = styled.nav`
     color: white;
     font-family: Roboto-Regular;
     font-size: 30px;
@@ -61,25 +64,31 @@ const Logo = styled.img`
 
     background-color: white;
 `;
-export default function Sidebar() {
+function Sidebar() {
+    const reDir = useNavigate();
+    
     return(
         <SidebarContainer>
             <Brand />
             <NavContainer>
                 <RedirectContainer className="DASHBOARD">
                     {/* <Logo src={dashboardLogo} /> */}
-                    <Redirect>DASHBOARD</Redirect>
+                    <Link onClick={() => reDir("dashboard")}>DASHBOARD</Link>
                 </RedirectContainer>
+
                 <RedirectContainer className="RECIPES">
-                    <Redirect>RECIPES</Redirect>
+                    <Link onClick={() => reDir("recipe")}>RECIPES</Link>
                 </RedirectContainer>
+
                 <RedirectContainer className="MACROS">
-                    <Redirect>MACROS</Redirect>
+                    <Link onClick={() => reDir("macros")} >MACROS</Link>
                 </RedirectContainer>
+
                 <RedirectContainer className="FITNESS">
-                    <Redirect>FITNESS</Redirect>
+                    <Link onClick={() => reDir("fitness")} >FITNESS</Link>
                 </RedirectContainer>
             </NavContainer>
         </SidebarContainer>
     );
-}
+};
+export default Sidebar
