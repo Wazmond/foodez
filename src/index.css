@@ -4,6 +4,10 @@
   padding: 0;
 }
 
+html {
+  overflow: hidden;
+}
+
 @font-face {
   font-family: Roboto-Regular;
   src: url(/src/Fonts/Roboto/Roboto-Regular.ttf);

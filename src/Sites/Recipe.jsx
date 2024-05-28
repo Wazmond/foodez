@@ -3,8 +3,7 @@ import styled from 'styled-components'
 import PantryPage from './RecipePage/Pantry.jsx'
 
 const RecipeContainer = styled.div`
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
     background-color: #0077ff;
     display: flex;
     justify-content : flex-end;
@@ -12,13 +11,9 @@ const RecipeContainer = styled.div`
 
 const RecipePage = styled.div`
     height: 100%;
-    width: 85vw;
+    width: 100%;
     display: flex;
     flex-direction: column;
-
-    @media screen and (max-width: 1500px) {
-        width: calc(100vw - 225px);
-    }
 `;
 
 const NavBar = styled.div`
@@ -29,10 +24,11 @@ const NavBar = styled.div`
     justify-content: space-evenly;
 `;
 const NavRedirect = styled.nav`
+    height: 40px;
     font-size: 30px;
     border: 2px solid black;
-    margin: 5.625px 0;
     padding: 2.5px 100px;
+    margin-bottom: auto;
     border-radius: 10px;
     background-color: white;
     font-family: Roboto-Regular;
@@ -45,8 +41,8 @@ const NavRedirect = styled.nav`
 const Page = styled.div`
     background-color: white;
     border-radius: 7px;
-    height: 94.5%;
-    width: 98%;
+    height: 100%;
+    width: 100%;
     align-self: center;
     margin: 0 0 auto;
 `;
@@ -70,11 +66,7 @@ export default function Recipe() {
                     <NavRedirect href='#recipes' onClick={() => setIsPageDisplaying(false)}>RECIPES</NavRedirect>
                 </NavBar>
                 <Page>
-                    <PantryPages id="pantry" isPageDisplaying={isPageDisplaying} />
-                        <PantryPage />
-                    <RecipesPage id="recipes" isPageDisplaying={isPageDisplaying}>
-                        <h1>Recipes</h1>
-                    </RecipesPage>
+                    {isPageDisplaying ? (<PantryPage />) : (<RecipesPage />) }
                 </Page>
             </RecipePage>
         </RecipeContainer>

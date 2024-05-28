@@ -6,9 +6,7 @@ import dashboardLogo from '/src/Images/dashboard-logo.svg'
 
 
 const SidebarContainer = styled.div`
-    width: 15vw;
-    min-width: 225px;
-    max-width: 250px;
+    width: 225px;
     height: 100vh;
     background-color: #333333;
     display: flex;
@@ -73,24 +71,24 @@ function Sidebar() {
         <SidebarContainer>
             <Brand />
             <NavContainer>
-                <RedirectContainer className="DASHBOARD">
+                <RedirectContainer className="DASHBOARD" onClick={() => redirect("dashboard")}>
                     {/* <Logo src={DashboardLogo} /> */}
-                    <Link onClick={() => redirect("dashboard")} >DASHBOARD</Link>
+                    <Link >DASHBOARD</Link>
                 </RedirectContainer>
 
-                <RedirectContainer className="RECIPES">
+                <RedirectContainer className="RECIPES" onClick={() => redirect("recipe")}>
                     {/* <Logo src={RecipesLogo} /> */}
-                    <Link onClick={() => redirect("recipe")} >RECIPES</Link>
+                    <Link >RECIPES</Link>
                 </RedirectContainer>
 
-                <RedirectContainer className="MACROS">
+                <RedirectContainer className="MACROS" onClick={() => redirect("macros")}>
                     {/* <Logo src={MacrosLogo} /> */}
-                    <Link onClick={() => redirect("macros")} >MACROS</Link>
+                    <Link >MACROS</Link>
                 </RedirectContainer>
 
-                <RedirectContainer className="FITNESS">
+                <RedirectContainer className="FITNESS" onClick={() => redirect("fitness")}>
                     {/* <Logo src={FitnessLogo} /> */}
-                    <Link onClick={() => redirect("fitness")} >FITNESS</Link>
+                    <Link >FITNESS</Link>
                 </RedirectContainer>
             </NavContainer>
         </SidebarContainer>

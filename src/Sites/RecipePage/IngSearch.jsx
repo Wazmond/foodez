@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const PantrySearchContainer = styled.div`
     font-size: 20px;
@@ -7,18 +7,13 @@ const PantrySearchContainer = styled.div`
     height: 90%;
     display: flex;
     flex-direction: column;
-
+    box-shadow: 0 5px 15px #686868;
+    border-radius: 20px;
     h2 {
         text-align: center;
     }
 `;
-const SearchContainer = styled.div`
-    box-shadow: 0 5px 15px #686868;
-    border-radius: 20px;
-    margin: auto 0 0;
-    width: 100%;
-    height: 100%;
-`;
+
 const DividerLine = styled.div`
     width: 80%;
     height: 0px;
@@ -42,10 +37,8 @@ const ResultContainer = styled.div`
     flex-direction: column;
     justify-content: flex-start;
     padding: 10px;
-    /* height: 30%; */
     width: 90%;
     text-decoration: none;
-    /* border: 2px solid purple; */
     border-radius: 25px;
     margin: 0 auto;
     list-style-type: none;
@@ -69,15 +62,13 @@ const SeachResultSpan = styled.span`
     }
     `;
 
-const PantrySearchResults = styled.label`
-
-`;
+const PantrySearchResults = styled.label``;
 
 function Ing_add() {
     // add to redux-persist
 }
 
-export default function PantrySearch() {
+export default function IngSearch() {
     const [inputValue, setInputValue] = useState('');
     const [debouncedValue, setDebouncedValue] = useState(inputValue);
     const [APIresults, setAPIResults] = useState([]);
@@ -124,23 +115,22 @@ export default function PantrySearch() {
 
     return(
         <>
-            <PantrySearchContainer>
-                <SearchContainer>
-                    <h2>Ingredient Search</h2>
-
-                    <PantrySearchInputBox id="ing_input" placeholder='Search for items here...' value={inputValue} onChange={(e) => (setInputValue(e.target.value))}/>
-                    <DividerLine />
-                    <ResultContainer>
-                        {APIresults == "" ? 
-                            (<li>Please enter item into search box to begin.</li>) : 
-                            (APIresults.length > 0 ? 
-                                (APIresults.map((result, index) => (
-                                    <SeachResultSpan><PantrySearchResults key={index} onClick={Ing_add} >{result.name}</PantrySearchResults></SeachResultSpan>
-                                ))) : (
-                                    <li>No results found...</li>
-                                ))}
-                    </ResultContainer>
-                </SearchContainer>
+            <PantrySearchContainer className='Container'>
+                <h2>Ingredient Search</h2>
+                <PantrySearchInputBox id="ing_input" placeholder='Search for items here...' value={inputValue} onChange={(e) => (setInputValue(e.target.value))}/>
+                <DividerLine />
+                <ResultContainer>
+                    {APIresults == "" ? 
+                        (<li>Please enter item into search box to begin.</li>) : 
+                        (APIresults.length > 0 ? 
+                            (APIresults.map((result, index) => (
+                                <SeachResultSpan>
+                                    <PantrySearchResults key={index}>{result.name}</PantrySearchResults>
+                                </SeachResultSpan>
+                            ))) : (
+                                <li>No results found...</li>
+                            ))}
+                </ResultContainer>
             </PantrySearchContainer>
         </>
     );

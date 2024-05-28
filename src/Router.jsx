@@ -12,6 +12,7 @@ import Fitness from './Sites/Fitness'
  const router = createBrowserRouter(
     createRoutesFromElements(
         <Route path="/" element={<Root />} >
+          <Route path="/" element={<Dashboard />} />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="recipe" element={<Recipe />} />
           <Route path="macros" element={<Macros />} />

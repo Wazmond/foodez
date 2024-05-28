@@ -1,7 +1,28 @@
+import styled from "styled-components";
+import DailyFoodGoal from "./DashboardPage/DailyFoodGoal";
+import DailyFitnessGoal from "./DashboardPage/DailyFitnessGoal";
+import WeeklyFitnessGoal from "./DashboardPage/WeeklyFitnessGoal";
+
+const DashboardPage = styled.div`
+    background-color: white;
+    border-radius: 7px;
+    height: 100%;
+    width: 100%;
+    font-family: roboto-regular;
+
+    padding: 25px;
+`;
+
+var user;
+
 export default function Dashboard() {
     return(
-        <>
-            <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor sequi officiis suscipit consectetur hic temporibus. Fuga ad laudantium quis, illo dignissimos eos beatae, quae consectetur ea quia optio inventore voluptates.</h1>
-        </>
+        <DashboardPage>
+            <h1>Welcome {user}</h1>
+
+            <DailyFoodGoal /> {/* done */}
+            <DailyFitnessGoal />
+            <WeeklyFitnessGoal />
+        </DashboardPage>
     );
 };
