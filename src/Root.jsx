@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router'
+import { Outlet } from 'react-router-dom'
 import Sidebar from './sidebar'
 import styled from 'styled-components'
 
@@ -15,10 +15,10 @@ const Main = styled.div`
 const Root = () => {
     return(
         <Container>
-            <Sidebar/>
-            <Main>
-                <Outlet />
-            </Main>       
+          <Sidebar/>
+          <Main>
+            <Outlet />
+          </Main>       
         </Container>
     )
 }

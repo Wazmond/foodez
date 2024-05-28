@@ -75,22 +75,22 @@ function Sidebar() {
             <NavContainer>
                 <RedirectContainer className="DASHBOARD">
                     {/* <Logo src={DashboardLogo} /> */}
-                    <Link onClick={() => redirect("Dashboard")} >DASHBOARD</Link>
+                    <Link onClick={() => redirect("dashboard")} >DASHBOARD</Link>
                 </RedirectContainer>
 
                 <RedirectContainer className="RECIPES">
                     {/* <Logo src={RecipesLogo} /> */}
-                    <Link onClick={() => redirect("Recipe")} >RECIPES</Link>
+                    <Link onClick={() => redirect("recipe")} >RECIPES</Link>
                 </RedirectContainer>
 
                 <RedirectContainer className="MACROS">
                     {/* <Logo src={MacrosLogo} /> */}
-                    <Link onClick={() => redirect("Macros")} >MACROS</Link>
+                    <Link onClick={() => redirect("macros")} >MACROS</Link>
                 </RedirectContainer>
 
                 <RedirectContainer className="FITNESS">
                     {/* <Logo src={FitnessLogo} /> */}
-                    <Link onClick={() => redirect("Fitness")} >FITNESS</Link>
+                    <Link onClick={() => redirect("fitness")} >FITNESS</Link>
                 </RedirectContainer>
             </NavContainer>
         </SidebarContainer>
