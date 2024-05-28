@@ -1,7 +1,7 @@
 import { createBrowserRouter,
     createRoutesFromElements
  } from "react-router-dom";
-import { Route } from "react-router";
+import { Route } from "react-router-dom";
 
 import Root from './Root'
 import Dashboard from './Sites/Dashboard'
