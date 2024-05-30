@@ -20,7 +20,7 @@ const Brand = styled.div`
     height: 200px;
     width: 200px;
     background-color: white;
-    margin: calc((15vw - 200px)/2) auto;
+    margin: 12.5px;
 `;
 
 const NavContainer = styled.div`

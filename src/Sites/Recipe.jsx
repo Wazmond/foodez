@@ -47,11 +47,8 @@ const Page = styled.div`
     margin: 0 0 auto;
 `;
 
-const PantryPages = styled.div`
-    display: ${({ isPageDisplaying }) => (isPageDisplaying ? "flex" : "none")};
-`;
 const RecipesPage = styled.div`
-    display: ${({ isPageDisplaying }) => (isPageDisplaying ? "none" : "flex")};
+
 `;
 
 export default function Recipe() {

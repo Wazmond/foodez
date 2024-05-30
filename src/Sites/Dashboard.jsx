@@ -2,6 +2,7 @@ import styled from "styled-components";
 import DailyFoodGoal from "./DashboardPage/DailyFoodGoal";
 import DailyFitnessGoal from "./DashboardPage/DailyFitnessGoal";
 import WeeklyFitnessGoal from "./DashboardPage/WeeklyFitnessGoal";
+import WeeklyFoodTrend from "./DashboardPage/WeeklyFoodTrend";
 
 const DashboardPage = styled.div`
     background-color: white;
@@ -11,6 +12,10 @@ const DashboardPage = styled.div`
     font-family: roboto-regular;
 
     padding: 25px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
 `;
 
 var user;
@@ -21,8 +26,9 @@ export default function Dashboard() {
             <h1>Welcome {user}</h1>
 
             <DailyFoodGoal /> {/* done */}
-            <DailyFitnessGoal />
-            <WeeklyFitnessGoal />
+            <DailyFitnessGoal /> {/* DONE*/}
+            <WeeklyFitnessGoal /> {/* DONE*/}
+            <WeeklyFoodTrend />
         </DashboardPage>
     );
 };

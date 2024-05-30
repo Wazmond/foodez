@@ -124,8 +124,8 @@ export default function IngSearch() {
                         (<li>Please enter item into search box to begin.</li>) : 
                         (APIresults.length > 0 ? 
                             (APIresults.map((result, index) => (
-                                <SeachResultSpan>
-                                    <PantrySearchResults key={index}>{result.name}</PantrySearchResults>
+                                <SeachResultSpan key={index}>
+                                    <PantrySearchResults>{result.name}</PantrySearchResults>
                                 </SeachResultSpan>
                             ))) : (
                                 <li>No results found...</li>
