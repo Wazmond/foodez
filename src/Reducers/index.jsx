@@ -1,13 +1,22 @@
-const initialState = { counter: 0 };
-const counterReducer = ( state = initialState, action) => {
+import { createReducer } from "@reduxjs/toolkit";
+import { SET_RESULT } from "../Actions";
+
+const initialState = { result: '' };
+
+const resultReducer = (state = initialState, action) => {
     switch (action.type) {
-        case "INCREMENT":
-            return {...state, counter: state.counter + 1};
-        case "DECREMENT":
-            return {...state, counter: state.counter - 1};
+        case SET_RESULT:
+            return {
+                ...state,
+                result: action.payload
+            }
         default:
             return state;
     }
-};
+}
+export default resultReducer;
 
-export default counterReducer
+const inventoryReducer = createReducer([],  (builder) => {
+
+
+})

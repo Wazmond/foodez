@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
-import counterReducer from '../Reducers/index'
+import resultReducer from '../Reducers/index'
 import storage from 'redux-persist/lib/storage'
 import { FLUSH, REGISTER, PAUSE, PERSIST, PURGE, REHYDRATE, persistReducer, persistStore } from 'redux-persist'
 import { thunk } from 'redux-thunk'
@@ -9,7 +9,7 @@ const persistConfig = {
     storage,
 }
 
-const persistedReducer = persistReducer(persistConfig, counterReducer)
+const persistedReducer = persistReducer(persistConfig, resultReducer)
 
 export const store = configureStore({
     reducer: persistedReducer,
