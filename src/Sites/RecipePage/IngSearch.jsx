@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import React, { useEffect, useState } from 'react'
+import { setResult } from '../../Actions';
 
 const PantrySearchContainer = styled.div`
     font-size: 20px;
@@ -68,11 +69,19 @@ function Ing_add() {
     // add to redux-persist
 }
 
+
 export default function IngSearch() {
     const [inputValue, setInputValue] = useState('');
     const [debouncedValue, setDebouncedValue] = useState(inputValue);
     const [APIresults, setAPIResults] = useState([]);
 
+    function handleOnclick(result) {
+        console.log("handeOnclick is running");
+        // setResult(result);
+        setInputValue('');
+        console.log();
+    }
+    
     useEffect(() => {
         const timeoutHandler = setTimeout(() => {
             setDebouncedValue(inputValue);
@@ -124,7 +133,7 @@ export default function IngSearch() {
                         (<li>Please enter item into search box to begin.</li>) : 
                         (APIresults.length > 0 ? 
                             (APIresults.map((result, index) => (
-                                <SeachResultSpan key={index}>
+                                <SeachResultSpan key={index} onClick={() => handleOnclick(result.name)}>
                                     <PantrySearchResults>{result.name}</PantrySearchResults>
                                 </SeachResultSpan>
                             ))) : (
