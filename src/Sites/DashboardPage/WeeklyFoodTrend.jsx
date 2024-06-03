@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import Chart from 'chart.js/auto'
 
 const WeeklyFoodTrendPage = styled.div`
     display: flex;
@@ -15,7 +16,6 @@ export default function WeeklyFoodTrend() {
     return(
         <>
         <WeeklyFoodTrendPage>
-
         </WeeklyFoodTrendPage>
         </>
     )

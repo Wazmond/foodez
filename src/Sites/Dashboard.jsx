@@ -16,6 +16,7 @@ const DashboardPage = styled.div`
     display: flex;
     flex-direction: column;
     gap: 25px;
+    flex-wrap: wrap;
 `;
 
 var user;
