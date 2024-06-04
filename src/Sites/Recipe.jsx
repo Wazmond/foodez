@@ -59,7 +59,7 @@ export default function Recipe() {
         <RecipeContainer>
             <RecipePage>
                 <NavBar>
-                    <NavRedirect href='#pantry' onClick={() => setIsPageDisplaying(true)}>PANTRY</NavRedirect>
+                    <NavRedirect href='#pantry' onClick={() => setIsPageDisplaying(true)}>INGREDIENTS</NavRedirect>
                     <NavRedirect href='#recipes' onClick={() => setIsPageDisplaying(false)}>RECIPES</NavRedirect>
                 </NavBar>
                 <Page>

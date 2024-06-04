@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import React, { useEffect, useState } from 'react'
-import { setResult } from '../../Actions';
+import { addInventory } from '../../Actions';
+import { useDispatch } from 'react-redux'
 
 const PantrySearchContainer = styled.div`
     font-size: 20px;
@@ -34,6 +35,7 @@ const PantrySearchInputBox = styled.input`
     }
 `;
 const ResultContainer = styled.div`
+    /* border: 2px solid blue; */
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -47,6 +49,8 @@ const ResultContainer = styled.div`
     color: black;
     font-family: roboto-regular;
     font-size: 25px;
+    background-color: #f6f6f6;
+
 `;
 
 const SeachResultSpan = styled.span`
@@ -63,21 +67,21 @@ const SeachResultSpan = styled.span`
     }
     `;
 
-const PantrySearchResults = styled.label``;
-
-function Ing_add() {
-    // add to redux-persist
-}
-
+const PantrySearchResults = styled.label`
+    &::first-letter {
+        text-transform: capitalize;
+    }
+`;
 
 export default function IngSearch() {
     const [inputValue, setInputValue] = useState('');
     const [debouncedValue, setDebouncedValue] = useState(inputValue);
     const [APIresults, setAPIResults] = useState([]);
+    const dispatch = useDispatch();
 
     function handleOnclick(result) {
         console.log("handeOnclick is running");
-        // setResult(result);
+        dispatch(addInventory(result));
         setInputValue('');
         console.log();
     }
@@ -85,7 +89,7 @@ export default function IngSearch() {
     useEffect(() => {
         const timeoutHandler = setTimeout(() => {
             setDebouncedValue(inputValue);
-        }, 1000);
+        }, 300);
         return () => {
             clearTimeout(timeoutHandler);
         };
@@ -133,7 +137,7 @@ export default function IngSearch() {
                         (<li>Please enter item into search box to begin.</li>) : 
                         (APIresults.length > 0 ? 
                             (APIresults.map((result, index) => (
-                                <SeachResultSpan key={index} onClick={() => handleOnclick(result.name)}>
+                                <SeachResultSpan key={index} onClick={() => handleOnclick(result)}>
                                     <PantrySearchResults>{result.name}</PantrySearchResults>
                                 </SeachResultSpan>
                             ))) : (

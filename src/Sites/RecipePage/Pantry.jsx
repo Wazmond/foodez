@@ -28,7 +28,7 @@ export default function PantryPage() {
     return(
         <>
             <PantryPageContainer>
-                <h1>PANTRY</h1>
+                <h1>INGREDIENTS</h1>
                 <ContentContainer>
                     <Inventory />
                     <IngSearch />

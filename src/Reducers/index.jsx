@@ -1,22 +1,26 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { SET_RESULT } from "../Actions";
+import { CLEAR_INVENTORY, ADD_INVENTORY, REMOVE_ITEM } from "../Actions";
 
-const initialState = { result: '' };
+const initialState = {
+    inventory: []
+}
 
-const resultReducer = (state = initialState, action) => {
+const invenReducer = (state = initialState, action) => {
     switch (action.type) {
-        case SET_RESULT:
+        case ADD_INVENTORY:
             return {
                 ...state,
-                result: action.payload
+                inventory: [...state.inventory, action.payload]
             }
+        case REMOVE_ITEM:
+            return {
+                ...state,
+                inventory: state.inventory.filter((item) => item.name !== action.payload.name)
+            }
+        case CLEAR_INVENTORY:
+            return initialState;
         default:
             return state;
     }
 }
-export default resultReducer;
-
-const inventoryReducer = createReducer([],  (builder) => {
-
-
-})
+export default invenReducer;
