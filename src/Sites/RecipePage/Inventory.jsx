@@ -30,7 +30,8 @@ const PantryInventory = styled.ol`
     justify-content: flex-start;
     padding: 10px;
     width: 90%;
-    border-radius: 25px;
+    height: 100%;
+    border-radius: 5px;
     text-decoration: none;
     margin: 0 auto;
     color: black;
@@ -58,14 +59,15 @@ const InventoryResultSpan = styled.span`
 const InventoryResult = styled.label``;
 
 const ClearItem = styled.button`
-    height: 100%;
+    height: 35px;
     width: 50px;
-    margin-left: auto;
+    margin: 0 15px 0 auto;
 `;
 
 const ClearInv = styled.button`
-     height: 50px;
-     width: 100px;
+    margin: 25px auto;
+    height: 50px;
+    width: 300px;
 `;
 
 export default function Inventory() {

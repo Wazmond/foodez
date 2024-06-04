@@ -42,7 +42,7 @@ const ResultContainer = styled.div`
     padding: 10px;
     width: 90%;
     text-decoration: none;
-    border-radius: 25px;
+    border-radius: 5px;
     margin: 0 auto;
     list-style-type: none;
 
@@ -89,7 +89,7 @@ export default function IngSearch() {
     useEffect(() => {
         const timeoutHandler = setTimeout(() => {
             setDebouncedValue(inputValue);
-        }, 300);
+        }, 1000);
         return () => {
             clearTimeout(timeoutHandler);
         };
