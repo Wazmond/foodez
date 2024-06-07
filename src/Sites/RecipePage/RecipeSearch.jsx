@@ -5,14 +5,13 @@ import styled from 'styled-components'
 const Page = styled.div`
     height: 100%;
     width: 100%;
+    font-family: roboto-thin;
     h1 {
         text-align: center;
     }
 `;
 export default function RecipesPage() {
-    let searchQuery = "pasta"; 
-    const apiKey = '2595d0356c9249378e7ae892d1368b16';
-    // const { data } = useGetRecipesByIngQuery({ apiKey, searchQuery});
+
     // console.log(data);
     {/* accessing the api will return
         - id
@@ -47,9 +46,30 @@ const GridContainer = styled.div`
     `;
 
 const RecipeLayout = () => {
+    let searchQuery = "chicken"; 
+    const apiKey = '2595d0356c9249378e7ae892d1368b16';
+    const data = ['1', '2', '3'];
+    const results = data;
+    // const { data } = useGetRecipesByIngQuery({ apiKey, searchQuery});
+    // const results = data ? data.results : [] ;
+    console.log(results)
+    
     return( 
         <RecipesContainer>
             <GridContainer>
+                {results === null ? <p>No results were found...</p> : results.map((result) => {
+                    console.log("test");
+                    return(
+                        <RecipeGrid 
+                        title={result.title} 
+                        imgLink={result.image} 
+                        key={result.id} 
+                        id={result.id}
+                    />
+                    )
+
+                })}
+                {/* <RecipeGrid />
                 <RecipeGrid />
                 <RecipeGrid />
                 <RecipeGrid />
@@ -66,8 +86,7 @@ const RecipeLayout = () => {
                 <RecipeGrid />
                 <RecipeGrid />
                 <RecipeGrid />
-                <RecipeGrid />
-                <RecipeGrid />
+                <RecipeGrid /> */}
             </GridContainer>
         </RecipesContainer>
     )
@@ -92,17 +111,17 @@ const Card = styled.div`
 const FoodImg = styled.img`
     width: 100%;
     height: 200px;
+    margin: auto;
 `;
 const RecipeTitle = styled.h2``;
 const RecipeDesc = styled.p``;
 
-const RecipeGrid = () => {
+const RecipeGrid = ({title, imgLink}) => {
     return(
         <CardContainer>
             <Card>
-                <FoodImg />
-                <RecipeTitle>Title of Recipe</RecipeTitle>
-                <RecipeDesc>Desc of Recipe</RecipeDesc>
+                <FoodImg src={imgLink} alt={title} />
+                <RecipeTitle>{title}</RecipeTitle>
             </Card>
         </CardContainer>
     )

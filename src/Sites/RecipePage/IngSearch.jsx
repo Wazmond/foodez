@@ -96,8 +96,8 @@ export default function IngSearch() {
     }, [inputValue]);
 
     useEffect(() => {
-        debouncedValue == "" ? (setAPIResults([]), 
-                            console.log("APIresults have been set to" + APIresults)
+        debouncedValue == "" ? (setAPIResults([])
+                            // console.log("APIresults have been set to" + APIresults)
                         ) : (
                             FetchData(),
                             console.log("FetchData function is running now, Input Value is: " + inputValue + "...")
