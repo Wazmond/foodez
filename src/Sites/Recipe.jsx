@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import styled from 'styled-components'
 import PantryPage from './RecipePage/Ingredients.jsx'
 import RecipesPage from './RecipePage/RecipeSearch.jsx';
+import { useDispatch } from 'react-redux';
+import recipePageStateSlice from '../API/Slices/RecipesSlice.jsx';
+import { recipes, ingredients } from '../API/Slices/RecipesSlice.jsx';
+import { useSelector } from 'react-redux';
 
 const RecipeContainer = styled.div`
     height: 100%;
@@ -50,18 +54,18 @@ const Page = styled.div`
 `;
 
 export default function Recipe() {
-    const [isPageDisplaying, setIsPageDisplaying] = useState(true);
-
+    const dispatch = useDispatch();
+    let pageState = useSelector(state => state.recipePageState.value);
     return(
         <>
         <RecipeContainer>
             <RecipePage>
                 <NavBar>
-                    <NavRedirect href='#pantry' onClick={() => setIsPageDisplaying(true)}>INGREDIENTS</NavRedirect>
-                    <NavRedirect href='#recipes' onClick={() => setIsPageDisplaying(false)}>RECIPES</NavRedirect>
+                    <NavRedirect href='#pantry' onClick={() => dispatch(ingredients()) } >INGREDIENTS</NavRedirect>
+                    <NavRedirect href='#recipes' onClick={() => dispatch(recipes()) } >RECIPES</NavRedirect>
                 </NavBar>
                 <Page>
-                    {isPageDisplaying ? (<PantryPage />) : (<RecipesPage />) }
+                    {pageState == 0 ? (<PantryPage />) : (<RecipesPage />) }
                 </Page>
             </RecipePage>
         </RecipeContainer>

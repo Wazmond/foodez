@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { CLEAR_INVENTORY, ADD_INVENTORY, REMOVE_ITEM } from "../Actions/Actions";
+import { CLEAR_INVENTORY, ADD_INVENTORY, REMOVE_ITEM } from "../Actions/InvenPageActions";
 
 const initialState = {
     inventory: []

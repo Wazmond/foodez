@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import React, { useEffect, useState } from 'react'
-import { addInventory } from '../../Actions/Actions';
+import { addInventory } from '../../Actions/InvenPageActions';
 import { useDispatch } from 'react-redux'
 
 const PantrySearchContainer = styled.div`

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { clearInventory, removeItem } from '../../Actions/Actions'
+import { clearInventory, removeItem } from '../../Actions/InvenPageActions'
 import { useDispatch, useSelector } from "react-redux";
 import { store } from "../../Store/store";
 
