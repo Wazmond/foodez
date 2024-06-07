@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import invenReducer from '../Reducers/index'
+import invenReducer from '../Reducers/InventoryReducer'
 import storage from 'redux-persist/lib/storage'
 import { FLUSH, REGISTER, PAUSE, PERSIST, PURGE, REHYDRATE, persistReducer, persistStore } from 'redux-persist'
 import { recipeSearchApi } from '../API/RecipeSearchAPI'
