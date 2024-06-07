@@ -46,6 +46,7 @@ const Page = styled.div`
     width: 100%;
     align-self: center;
     margin: 0 0 auto;
+    overflow: hidden;
 `;
 
 export default function Recipe() {
