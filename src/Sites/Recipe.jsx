@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import PantryPage from './RecipePage/Ingredients.jsx'
 import RecipesPage from './RecipePage/RecipeSearch.jsx';
 import { useDispatch } from 'react-redux';
-import recipePageStateSlice from '../API/Slices/RecipesSlice.jsx';
 import { recipes, ingredients } from '../API/Slices/RecipesSlice.jsx';
 import { useSelector } from 'react-redux';
 
