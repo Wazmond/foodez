@@ -78,18 +78,18 @@ export default function Inventory() {
         dispatch(removeItem(item));
     }
 
-    const inventory = state => state.inventory;
+
     const inventoryList = () => {
+        const inventory = state => state.inventory;
         const items = useSelector(inventory)
-        const itemsList = items.map((item) => {
+        const itemsList = Array.isArray(items) ? items.map((item) => {
             return (
                 <InventoryResultSpan key={item.id}>
                     <InventoryResult >{item.name}</InventoryResult>
                     <ClearItem onClick={() => handleRmItem(item)}>X</ClearItem>
                 </InventoryResultSpan>
             );
-        });
-
+        }) : [];
         return (
             <PantryInventory>{itemsList}</PantryInventory>
         )

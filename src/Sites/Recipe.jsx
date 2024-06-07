@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components'
-import PantryPage from './RecipePage/Pantry.jsx'
+import PantryPage from './RecipePage/Ingredients.jsx'
+import RecipesPage from './RecipePage/RecipeSearch.jsx';
 
 const RecipeContainer = styled.div`
     height: 100%;
@@ -45,10 +46,6 @@ const Page = styled.div`
     width: 100%;
     align-self: center;
     margin: 0 0 auto;
-`;
-
-const RecipesPage = styled.div`
-
 `;
 
 export default function Recipe() {
