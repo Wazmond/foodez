@@ -7,16 +7,18 @@ import recipePageStateSlice from '../API/Slices/RecipesSlice'
 
 const reducers = combineReducers({
     invenReducer,
-    [recipeSearchApi.reducerPath]: recipeSearchApi.reducer,
     recipePageState: recipePageStateSlice
 })
+
 const persistConfig = {
     key: 'root',
     version: 1,
     storage,
+    blacklist: [recipeSearchApi],
 }
 
 const persistedReducer = persistReducer(persistConfig, reducers)
+
 
 export const store = configureStore({
     reducer: persistedReducer, 

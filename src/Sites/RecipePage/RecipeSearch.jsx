@@ -1,7 +1,6 @@
 import  { useGetRecipesByIngQuery } from '../../API/RecipeSearchAPI'
 import styled from 'styled-components'
 
-
 const Page = styled.div`
     height: 100%;
     width: 100%;
@@ -10,20 +9,21 @@ const Page = styled.div`
         text-align: center;
     }
 `;
-export default function RecipesPage() {
 
-    // console.log(data);
-    {/* accessing the api will return
-        - id
-        - image
-        - image type
-        - title of recipe
-    */}
-   
+const SearchBox = styled.input``;
+/* checkboxes
+Ingredients Only
+Ingredients + missings
+No Ingredients
+Recipes by nutrient pref ( e.g more protein etc )
+Dietary reqs + allergies
+*/
+export default function RecipesPage() {   
     return (
         <>
             <Page>
                 <h1>RECIPES</h1>
+                <SearchBox placeholder='Search recipes here...'/>
                 <RecipeLayout />
             </Page>
         </>
@@ -40,20 +40,19 @@ const GridContainer = styled.div`
     flex-direction: row;
     flex-wrap: wrap;
     overflow: scroll;
+    /* overflow-y: hidden; */
 
     height: 100%;
     width: 100%;
-    `;
+`;
 
 const RecipeLayout = () => {
-    let searchQuery = "chicken"; 
+    let searchQuery = "Chicken"; 
     const apiKey = '2595d0356c9249378e7ae892d1368b16';
     const data = ['1', '2', '3'];
     const results = data;
     // const { data } = useGetRecipesByIngQuery({ apiKey, searchQuery});
     // const results = data ? data.results : [] ;
-    console.log(results)
-    
     return( 
         <RecipesContainer>
             <GridContainer>
@@ -69,31 +68,12 @@ const RecipeLayout = () => {
                     )
 
                 })}
-                {/* <RecipeGrid />
-                <RecipeGrid />
-                <RecipeGrid />
-                <RecipeGrid />
-                <RecipeGrid />
-                <RecipeGrid />
-                <RecipeGrid />
-                <RecipeGrid />
-                <RecipeGrid />
-                <RecipeGrid />
-                <RecipeGrid />
-                <RecipeGrid />
-                <RecipeGrid />
-                <RecipeGrid />
-                <RecipeGrid />
-                <RecipeGrid />
-                <RecipeGrid />
-                <RecipeGrid /> */}
             </GridContainer>
         </RecipesContainer>
     )
 }
 
 const CardContainer = styled.div`
-    /* border: 2px solid blue; */
     display: flex;
     flex: 0 0 33.3333%;
     flex-direction: column;
@@ -114,7 +94,6 @@ const FoodImg = styled.img`
     margin: auto;
 `;
 const RecipeTitle = styled.h2``;
-const RecipeDesc = styled.p``;
 
 const RecipeGrid = ({title, imgLink}) => {
     return(
