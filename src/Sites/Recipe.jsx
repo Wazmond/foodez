@@ -54,7 +54,7 @@ const Page = styled.div`
 
 export default function Recipe() {
     const dispatch = useDispatch();
-    let pageState = useSelector(state => state.recipePageState.value);
+    let pageState = useSelector(state => state.persistedReducer.recipePageState.value);
     return(
         <>
         <RecipeContainer>

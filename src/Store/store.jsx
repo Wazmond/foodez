@@ -21,7 +21,10 @@ const persistedReducer = persistReducer(persistConfig, reducers)
 
 
 export const store = configureStore({
-    reducer: persistedReducer, 
+    reducer: { 
+        persistedReducer,
+        [recipeSearchApi.reducerPath]: recipeSearchApi.reducer,
+    }, 
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
             serializableCheck: {
