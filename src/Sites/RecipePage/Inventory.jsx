@@ -80,7 +80,7 @@ export default function Inventory() {
 
 
     const inventoryList = () => {
-        const inventory = state => state.inventory;
+        const inventory = state => state.persistedReducer.invenReducer.inventory;
         const items = useSelector(inventory)
         const itemsList = Array.isArray(items) ? items.map((item) => {
             return (

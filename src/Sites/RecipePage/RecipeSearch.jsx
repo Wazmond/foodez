@@ -13,12 +13,22 @@ const Page = styled.div`
     }
 `;
 
-const SearchBox = styled.input``;
+const SearchContainer = styled.div`
+    display: flex;
+    /* flex-direction: row; */
+    padding: 0 30px;
 
-const SearchFilterToggle = styled.button``;
-const SearchFilterImg = styled.img`
+`;
+const SearchBox = styled.input`
+    height: 40px;
+    width: 500px;
+`;
+const SearchFilterToggle = styled.button`
     height:24px;
-    width: 24px;
+    width: 24px;`;
+const SearchFilterImg = styled.img`
+    height: 100%;
+    width: 100%;
 `;
 /* checkboxes
 Ingredients Only
@@ -27,27 +37,30 @@ No Ingredients
 Recipes by nutrient pref ( e.g more protein etc )
 Dietary reqs + allergies
 */
-// let searchQuery = document.getElementById('searchInput').value;
-
 
 
 export default function RecipesPage() {   
     const [dropDown, setDropDown] = useState(false);
     const [inputValue, setInputValue] = useState('');
 
+    const { data } = useGetRecipesByIngQuery({ searchQuery: inputValue });
+    const results = data ? data.results : [] ;
+
     function handleInput(e) {
         e.keyCode == 13 ? setInputValue(document.getElementById('searchInput').value) : [];
     }
-    
+
     return (
         <>
             <Page>
                 <h1>RECIPES</h1>
-                <SearchBox placeholder='Search recipes here...' id="searchInput" onKeyDown={handleInput} />
-                <SearchFilterToggle onClick={() => {setDropDown(!dropDown)}}>
-                    {dropDown == false ? <SearchFilterImg src={downArrow} /> : <SearchFilterImg src={upArrow} />}
-                </SearchFilterToggle>
-                <RecipeLayout inputValue={inputValue}/>
+                <SearchContainer>
+                    <SearchBox placeholder='Search recipes here...' id="searchInput" onKeyDown={handleInput} />
+                    <SearchFilterToggle onClick={() => {setDropDown(!dropDown)}}>
+                        {dropDown == false ? <SearchFilterImg src={downArrow} /> : <SearchFilterImg src={upArrow} />}
+                    </SearchFilterToggle>
+                </SearchContainer>
+                <RecipeLayout results={results}/>
             </Page>
         </>
     )
@@ -69,16 +82,7 @@ const GridContainer = styled.div`
     width: 100%;
 `;
 
-const RecipeLayout = ({ inputValue }) => {
-    const apiKey = '2595d0356c9249378e7ae892d1368b16';
-    const data = ['1', '2', '3'];
-    const results = data;
-    
-    // const { data } = useGetRecipesByIngQuery({ apiKey, inputValue});
-    // const results = data ? data.results : [] ;
-    console.log("refetch");
-    console.log("input value is: " + inputValue + ".");
-
+const RecipeLayout = ({ results }) => {
     return( 
         <RecipesContainer>
             <GridContainer>

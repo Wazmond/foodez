@@ -5,10 +5,14 @@ import { FLUSH, REGISTER, PAUSE, PERSIST, PURGE, REHYDRATE, persistReducer, pers
 import { recipeSearchApi } from '../API/RecipeSearchAPI'
 import recipePageStateSlice from '../API/Slices/RecipesSlice'
 
-const reducers = combineReducers({
+const pReducers = combineReducers({
     invenReducer,
     recipePageState: recipePageStateSlice
 })
+
+// const reducers = combineReducers({
+//     [recipeSearchApi.reducerPath]: recipeSearchApi.reducer
+// })
 
 const persistConfig = {
     key: 'root',
@@ -17,13 +21,13 @@ const persistConfig = {
     blacklist: [recipeSearchApi],
 }
 
-const persistedReducer = persistReducer(persistConfig, reducers)
+const persistedReducer = persistReducer(persistConfig, pReducers)
 
 
 export const store = configureStore({
     reducer: { 
         persistedReducer,
-        [recipeSearchApi.reducerPath]: recipeSearchApi.reducer,
+        [recipeSearchApi.reducerPath]: recipeSearchApi.reducer
     }, 
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
