@@ -16,8 +16,9 @@ const Page = styled.div`
 const SearchContainer = styled.div`
     display: flex;
     /* flex-direction: row; */
-    padding: 0 30px;
-
+    padding: 0 5vw;
+    /* justify-content: center; */
+    margin: 0 0 10px;
 `;
 const SearchBox = styled.input`
     height: 40px;
@@ -25,7 +26,8 @@ const SearchBox = styled.input`
 `;
 const SearchFilterToggle = styled.button`
     height:40px;
-    width:40px;`;
+    width:40px;
+`;
 const SearchFilterImg = styled.img`
     height: 100%;
     width: 100%;
@@ -37,7 +39,22 @@ No Ingredients
 Recipes by nutrient pref ( e.g more protein etc )
 Dietary reqs + allergies
 */
-
+const DropDownContainer = styled.div`
+    background-color: #779bff;
+    height: 200px;
+    width: 750px;
+`;
+const FiltersContainer = styled.div`
+    display: flex;
+`;
+const CheckBoxes = styled.input`
+    height: 25px;
+    width: 25px;
+    margin: 5px 15px;
+`;
+const CheckBoxTitle = styled.p`
+font-size: 25px;
+`;
 
 export default function RecipesPage() {   
     const [dropDown, setDropDown] = useState(false);
@@ -60,6 +77,13 @@ export default function RecipesPage() {
                         {dropDown == false ? <SearchFilterImg src={downArrow} /> : <SearchFilterImg src={upArrow} />}
                     </SearchFilterToggle>
                 </SearchContainer>
+                {dropDown == true ? 
+                            <DropDownContainer>
+                                <FiltersContainer>
+                                    <CheckBoxes type='checkbox' />
+                                    <CheckBoxTitle>Available ingredients recipes only</CheckBoxTitle>
+                                </FiltersContainer>
+                            </DropDownContainer> : []}
                 <RecipeLayout results={results}/>
             </Page>
         </>
