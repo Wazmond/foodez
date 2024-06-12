@@ -16,7 +16,13 @@ export const recipeSearchApi = createApi({
             }),
         }),
         getRecipesByNutrients: builder.query({
-            query: () => 'findByNutrients',
+            query: ({ ingredients }) => ({
+                url: 'findByNutrients',
+                params:{
+                    apiKey,
+                    ingredients: ingredients,
+                }
+            })
         }),
     }),
 });
