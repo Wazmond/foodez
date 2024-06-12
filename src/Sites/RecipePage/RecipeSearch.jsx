@@ -24,8 +24,8 @@ const SearchBox = styled.input`
     width: 500px;
 `;
 const SearchFilterToggle = styled.button`
-    height:24px;
-    width: 24px;`;
+    height:40px;
+    width:40px;`;
 const SearchFilterImg = styled.img`
     height: 100%;
     width: 100%;
