@@ -12,6 +12,7 @@ export const recipeSearchApi = createApi({
                 params: {
                     apiKey,
                     query: searchQuery,
+                    number: 100,
                 }
             }),
         }),

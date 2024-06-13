@@ -4,6 +4,7 @@ import storage from 'redux-persist/lib/storage'
 import { FLUSH, REGISTER, PAUSE, PERSIST, PURGE, REHYDRATE, persistReducer, persistStore } from 'redux-persist'
 import { recipeSearchApi } from '../API/RecipeSearchAPI'
 import recipePageStateSlice from '../API/Slices/RecipesSlice'
+import RecipeMenuSlice from '../API/Slices/RecipeMenuSlice'
 
 const pReducers = combineReducers({
     invenReducer,
@@ -11,7 +12,8 @@ const pReducers = combineReducers({
 })
 
 // const reducers = combineReducers({
-//     [recipeSearchApi.reducerPath]: recipeSearchApi.reducer
+//     ,
+//     RecipeMenuSlice
 // })
 
 const persistConfig = {
@@ -27,7 +29,8 @@ const persistedReducer = persistReducer(persistConfig, pReducers)
 export const store = configureStore({
     reducer: { 
         persistedReducer,
-        [recipeSearchApi.reducerPath]: recipeSearchApi.reducer
+        // RecipeMenuSlice,
+        [recipeSearchApi.reducerPath]: recipeSearchApi.reducer,
     }, 
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
