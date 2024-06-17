@@ -5,6 +5,7 @@ const apiKey = '2595d0356c9249378e7ae892d1368b16'
 export const recipeSearchApi = createApi({
     reducerPath: 'recipeSearchApi',
     baseQuery: fetchBaseQuery({baseUrl: 'https://api.spoonacular.com/recipes/'}),
+    keepUnusedDataFor: 120,
     endpoints: (builder) => ({
         getRecipesByIng: builder.query({
             query: ({ searchQuery }) => ({
@@ -25,7 +26,17 @@ export const recipeSearchApi = createApi({
                 }
             })
         }),
+        getRecipeInfo: builder.query({
+            query: ({ id }) => ({
+                url: `${id}/information`,
+                params: {
+                    apiKey,
+                    includeNutrition: true,
+                }
+
+            })
+        }),
     }),
 });
 
-export const { useGetRecipesByIngQuery } = recipeSearchApi
+export const { useGetRecipesByIngQuery, useGetRecipeInfoQuery } = recipeSearchApi

@@ -1,8 +1,8 @@
-import  { useGetRecipesByIngQuery } from '../../../API/RecipeSearchAPI'
+import  { useGetRecipesByIngQuery, useGetRecipeInfoQuery } from '../../../API/RecipeSearchAPI'
 import styled from 'styled-components'
 import downArrow from '../../../Images/double-down-arrow.png'
 import upArrow from '../../../Images/double-up-arrow.png'
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import RecipeMenu from './RecipeMenu';
 
 const Page = styled.div`
@@ -69,15 +69,35 @@ const Content = styled.div`
 
 export default function RecipesPage() {   
     const [dropDown, setDropDown] = useState(false);
-    const [inputValue, setInputValue] = useState('');
+    const [inputValue, setInputValue] = useState('')
     const [isRecipeOpen, setIsRecipeOpen] = useState(false);
+    const [ recipeMenuData, setRecipeMenuData ] = useState(null);
 
     const { data } = useGetRecipesByIngQuery({ searchQuery: inputValue });
     const results = data ? data.results : [] ;
 
+    const [recipeId, setRecipeId] = useState('');
+    const { data: recipeData } = useGetRecipeInfoQuery({ id: recipeId }, {skip: !recipeId});
+    useEffect(() => {
+        if (recipeData) {
+            console.log("Recipe data fetched: ", recipeData);
+            setRecipeMenuData(recipeData);
+        }
+    }, [recipeData]);
+
     function handleInput(e) {
         e.keyCode == 13 ? setInputValue(document.getElementById('searchInput').value) : [];
     }
+
+    function updateRecipeMenu(id) {
+        // console.log("id: " + id);
+        if (id !== null) {
+            console.log('id is not null so recipeId is being set as: ID' + id);
+            setRecipeId(id);
+            setIsRecipeOpen(true);
+        }
+    }
+
 
     return (
         <>
@@ -109,11 +129,11 @@ export default function RecipesPage() {
                 : []}
 
                 <Content>
-                    <RecipeLayout results={results} />
+                    <RecipeLayout results={results} updateRecipeMenu={updateRecipeMenu}/>
 
-                    {/* {isRecipeOpen == true ? */}
-                        <RecipeMenu /> 
-                    {/* // : [] } */}
+                    {isRecipeOpen && recipeMenuData &&
+                        <RecipeMenu recipeMenuData={recipeMenuData}/> 
+                    }
                 </Content>
             </Page>
         </>
@@ -130,16 +150,23 @@ const RecipesContainer = styled.div`
     /* overflow: auto; */
 `;
 
-const RecipeLayout = ({ results }) => {
+const RecipeLayout = ({ results, updateRecipeMenu }) => {
+    const handleRecipeMenu = (id, e) => {
+        e.preventDefault();
+        console.log('handling recipe menu');
+        updateRecipeMenu(id);
+    };
+
     return( 
         <RecipesContainer>
-            {results === null ? <p>No results were found...</p> : results.map((result) => {
+            {results === null ? <p>No results were found...</p> : results.map(({title, image, id}) => {
                 return(
                     <RecipeGrid 
-                        title={result.title} 
-                        imgLink={result.image} 
-                        key={result.id} 
-                        id={result.id}
+                        title={title} 
+                        imgLink={image} 
+                        key={id} 
+                        id={id}
+                        onClick={(e) => {handleRecipeMenu(id, e)}}
                     />
                 )
             })}
@@ -181,10 +208,10 @@ const FoodImg = styled.img`
 `;
 const RecipeTitle = styled.h2``;
 
-const RecipeGrid = ({title, imgLink}) => {
+const RecipeGrid = ({title, imgLink, onClick}) => {
     return(
         <CardContainer>
-            <Card>
+            <Card onClick={onClick}>
                 <FoodImg src={imgLink} alt={title} />
                 <RecipeTitle>{title}</RecipeTitle>
             </Card>
