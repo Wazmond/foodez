@@ -6,7 +6,9 @@ const Container = styled.div`
     height: 100%;
     border-radius: 10px;
     background-color: #c5deff;
-    overflow-y: auto;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    overflow: auto;
     display: flex;
     flex-direction: column;
 
@@ -15,9 +17,9 @@ const Container = styled.div`
     gap: 15px;
 `;
 const Image = styled.img`
-    height: 200px;
-    width: 200px;
+    width: 250px;
     margin: 10px auto;
+    border-radius: 10px;
 `;
 const Title = styled.h1`
     margin-bottom: 10px;

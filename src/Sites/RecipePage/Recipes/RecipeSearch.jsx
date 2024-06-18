@@ -66,6 +66,11 @@ const Content = styled.div`
     overflow: hidden;
     gap: 25px;
 `;
+const Recipe = styled.div`
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+`;
 
 export default function RecipesPage() {   
     const [dropDown, setDropDown] = useState(false);
@@ -110,26 +115,27 @@ export default function RecipesPage() {
                         {dropDown == false ? <SearchFilterImg src={downArrow} /> : <SearchFilterImg src={upArrow} />}
                     </SearchFilterToggle>
                 </SearchContainer>
-
-                {dropDown == true ? 
-                    <DropDownContainer>
-                        <FiltersContainer>
-                            <CheckBoxes type='checkbox' />
-                            <CheckBoxTitle>Available ingredients recipes only</CheckBoxTitle>
-                        </FiltersContainer>
-                        <FiltersContainer>
-                            <CheckBoxes type='checkbox' />
-                            <CheckBoxTitle>filter 1</CheckBoxTitle>
-                        </FiltersContainer>
-                        <FiltersContainer>
-                            <CheckBoxes type='checkbox' />
-                            <CheckBoxTitle>filter 2</CheckBoxTitle>
-                        </FiltersContainer>
-                    </DropDownContainer>
-                : []}
-
                 <Content>
-                    <RecipeLayout results={results} updateRecipeMenu={updateRecipeMenu}/>
+                    <Recipe>
+                        {dropDown == true ? 
+                            <DropDownContainer>
+                                <FiltersContainer>
+                                    <CheckBoxes type='checkbox' />
+                                    <CheckBoxTitle>Available ingredients recipes only</CheckBoxTitle>
+                                </FiltersContainer>
+                                <FiltersContainer>
+                                    <CheckBoxes type='checkbox' />
+                                    <CheckBoxTitle>filter 1</CheckBoxTitle>
+                                </FiltersContainer>
+                                <FiltersContainer>
+                                    <CheckBoxes type='checkbox' />
+                                    <CheckBoxTitle>filter 2</CheckBoxTitle>
+                                </FiltersContainer>
+                            </DropDownContainer>
+                        : []}
+
+                        <RecipeLayout results={results} updateRecipeMenu={updateRecipeMenu}/>
+                    </Recipe>
 
                     {isRecipeOpen && recipeMenuData &&
                         <RecipeMenu recipeMenuData={recipeMenuData}/> 
@@ -141,7 +147,6 @@ export default function RecipesPage() {
 }
 
 const RecipesContainer = styled.div`
-    flex: 2;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -185,6 +190,7 @@ const Card = styled.div`
     margin: auto;
     width: 200px;
     height: 300px;
+    padding: 5px;
 
     transition: all 50ms ease-out;
     &:hover{
@@ -198,8 +204,12 @@ const Card = styled.div`
 const FoodImg = styled.img`
     width: 100%;
     height: 200px;
+    border-radius: 10px;
 `;
-const RecipeTitle = styled.h2``;
+const RecipeTitle = styled.h2`
+    font-size: 1.8vmin;
+    text-align: center;
+`;
 
 const RecipeGrid = ({title, imgLink, onClick}) => {
     return(
