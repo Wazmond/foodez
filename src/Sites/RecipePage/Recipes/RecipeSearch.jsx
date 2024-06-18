@@ -4,6 +4,7 @@ import downArrow from '../../../Images/double-down-arrow.png'
 import upArrow from '../../../Images/double-up-arrow.png'
 import { useCallback, useEffect, useState } from 'react';
 import RecipeMenu from './RecipeMenu';
+import { useSelector } from 'react-redux';
 
 const Page = styled.div`
     height: 100%;
@@ -77,8 +78,12 @@ export default function RecipesPage() {
     const [inputValue, setInputValue] = useState('')
     const [isRecipeOpen, setIsRecipeOpen] = useState(false);
     const [ recipeMenuData, setRecipeMenuData ] = useState(null);
+    const [invenItemsOnly, setInvenItemsOnly] = useState(null);
 
-    const { data } = useGetRecipesByIngQuery({ searchQuery: inputValue });
+    const ingredients = state => state.persistedReducer.invenReducer.inventory;
+    const inventory = useSelector(ingredients);
+
+    const { data } = useGetRecipesByIngQuery({ searchQuery: inputValue, ingredients: (invenItemsOnly === true ? (inventory.name, console.log("fetching data with inven items" + inventory.name)) : [])});
     const results = data ? data.results : [] ;
 
     const [recipeId, setRecipeId] = useState('');
@@ -103,6 +108,10 @@ export default function RecipesPage() {
         }
     }
 
+    function inventoryItemsOnly() {
+        var inventoryOnly = document.getElementById('invenOnly');
+        inventoryOnly.checked ? setInvenItemsOnly(true) : setInvenItemsOnly(false);
+    }
 
     return (
         <>
@@ -120,7 +129,7 @@ export default function RecipesPage() {
                         {dropDown == true ? 
                             <DropDownContainer>
                                 <FiltersContainer>
-                                    <CheckBoxes type='checkbox' />
+                                    <CheckBoxes type='checkbox' id="invenOnly" onClick={inventoryItemsOnly}/>
                                     <CheckBoxTitle>Available ingredients recipes only</CheckBoxTitle>
                                 </FiltersContainer>
                                 <FiltersContainer>

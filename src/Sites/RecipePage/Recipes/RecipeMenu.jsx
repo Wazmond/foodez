@@ -49,9 +49,11 @@ const IngredientsContainer = styled.div`
 const Ingredients = styled.p``;
 const Methods = styled.p``;
 
+const Loading = styled.h1``;
+
 export default function RecipeMenu({ recipeMenuData }) {
     if (!recipeMenuData)  {
-        return <p>Loading...</p>
+        return <Loading>Loading...</Loading>
     }
     const calories = recipeMenuData.nutrition.nutrients.find(({name}) => name === "Calories");
     const fat = recipeMenuData.nutrition.nutrients.find(({name}) => name === "Fat");
