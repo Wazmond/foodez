@@ -1,0 +1,17 @@
+Complete recipe menu so it contains details of recipe.
+Create a dropdown requesting serving amount, and changing the ingredients amount accordingly
+Complete the filters section, so that itll search recipes with ingredients you have 
+    - Ingredients in inventory ONLY
+    - Contains ingredients in inventory 
+    And then change recipeSearchApi so it uses code splitting
+Adjust CSS styling on the page
+Create a shopping list style and possibly incorporate online shopping so you can add your ingredients req onto shopping list on websites
+
+Create Macros page so you can input information
+    - meal 1, (add info button) -> submit info like your simple macros
+    - add meal button etc
+    - add a date to the meals so you can log the information per day, and use some sort of graphing library to visually show 
+        - then incorporate this info on the dashboard so you can see basic info when you first load site.
+    - incorporate search recipe so you can add nutrients based on what you ate through there.
+
+

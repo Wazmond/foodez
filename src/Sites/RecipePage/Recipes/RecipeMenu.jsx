@@ -16,6 +16,8 @@ const Image = styled.img`
 const Title = styled.h1``;
 const Description = styled.p``;
 const Information = styled.p``;
+const NutritionsContainer = styled.p``;
+const IngTitle = styled.h2``;
 const IngredientsContainer = styled.div`
     border: 1px solid black;
 `;
@@ -32,7 +34,11 @@ export default function RecipeMenu({ recipeMenuData }) {
             <Image src={recipeMenuData.image}/>
             <Title>{recipeMenuData.title}</Title>
             {/* <Description>{recipeMenuData.summary}</Description> */}
-            <Information>Info of dish like nutrition</Information>
+            <Information>Nutrition:</Information>
+            <NutritionsContainer>
+                {}
+            </NutritionsContainer>
+            <IngTitle>Ingredients:</IngTitle>
             <IngredientsContainer>
                     {recipeMenuData.nutrition.ingredients.map((ingredient, index) => {
                         return (
