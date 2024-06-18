@@ -9,6 +9,8 @@ const Page = styled.div`
     height: 100%;
     width: 100%;
     font-family: roboto-thin;
+    display: flex;
+    flex-direction: column;
     h1 {
         text-align: center;
     }
@@ -16,9 +18,7 @@ const Page = styled.div`
 
 const SearchContainer = styled.div`
     display: flex;
-    /* flex-direction: row; */
     padding: 0 5vw;
-    /* justify-content: center; */
     margin: 0 0 10px;
 `;
 const SearchBox = styled.input`
@@ -58,13 +58,13 @@ const CheckBoxes = styled.input`
     margin: 0 15px;
 `;
 const CheckBoxTitle = styled.p`
-font-size: 25px;
+    font-size: 25px;
 `;
 const Content = styled.div`
-    height: 100%;
-    width: 100%;
     display: flex;
-    /* overflow-y: scroll; */
+    flex: 1;
+    overflow: hidden;
+    gap: 25px;
 `;
 
 export default function RecipesPage() {   
@@ -141,13 +141,11 @@ export default function RecipesPage() {
 }
 
 const RecipesContainer = styled.div`
-    height: 100%;
-    width: 100%;
+    flex: 2;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    overflow: auto;
-    /* overflow: auto; */
+    overflow-y: auto;
 `;
 
 const RecipeLayout = ({ results, updateRecipeMenu }) => {
@@ -178,7 +176,6 @@ const CardContainer = styled.div`
     display: flex;
     flex: 0 0 33.3333%;
     flex-direction: column;
-    /* margin-bottom: 30px; */
     height: 350px;
 `;
 const Card = styled.div`
@@ -201,10 +198,6 @@ const Card = styled.div`
 const FoodImg = styled.img`
     width: 100%;
     height: 200px;
-
-    max-height: 100%;
-    max-width: 100%;
-    margin: auto;
 `;
 const RecipeTitle = styled.h2``;
 

@@ -20,7 +20,7 @@ const RecipePage = styled.div`
     flex-direction: column;
 `;
 
-const NavBar = styled.div`
+const NavBar = styled.nav`
     height: 55px;
     width: 100%;
     display: flex;
@@ -37,19 +37,23 @@ const NavRedirect = styled.nav`
     background-color: white;
     font-family: Roboto-Regular;
 
+    transition: background-color 0.3s;
+
     &:hover {
         cursor: pointer;
+        background-color: #e9e9e9;
     }
 `;
 
 const Page = styled.div`
     background-color: white;
     border-radius: 7px;
-    height: 100%;
+    height: calc(100% - 55px);
     width: 100%;
     align-self: center;
-    margin: 0 0 auto;
+    margin: 0 auto;
     overflow: hidden;
+    padding: 10px 20px;
 `;
 
 export default function Recipe() {
