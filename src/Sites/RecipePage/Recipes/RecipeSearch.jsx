@@ -1,4 +1,4 @@
-import  { useGetRecipesByIngQuery, useGetRecipeInfoQuery } from '../../../API/RecipeSearchAPI'
+import  { useGetRecipesBySearchQuery, useGetRecipeInfoQuery, useGetRecipesByIngredientsQuery } from '../../../API/RecipeSearchAPI'
 import styled from 'styled-components'
 import downArrow from '../../../Images/double-down-arrow.png'
 import upArrow from '../../../Images/double-up-arrow.png'
@@ -78,13 +78,16 @@ export default function RecipesPage() {
     const [inputValue, setInputValue] = useState('')
     const [isRecipeOpen, setIsRecipeOpen] = useState(false);
     const [ recipeMenuData, setRecipeMenuData ] = useState(null);
-    const [invenItemsOnly, setInvenItemsOnly] = useState(null);
+    // const [maximiseInventory, setMaximiseInventory] = useState(null);
+    const [ranking, setRanking] = useState('');
 
-    const ingredients = state => state.persistedReducer.invenReducer.inventory;
-    const inventory = useSelector(ingredients);
+    const inventory = useSelector(state => state.persistedReducer.invenReducer.inventory);
+    const ingredientNames = ranking ? inventory.map(ingredient => ingredient.name) : [];
+    const ingredientsData = useGetRecipesByIngredientsQuery({ ingredients: ingredientNames, ranking }, { skip: ranking === '' });
+    const { data: searchData } = useGetRecipesBySearchQuery({ searchQuery: inputValue }, { skip: ranking !== '' });
 
-    const { data } = useGetRecipesByIngQuery({ searchQuery: inputValue, ingredients: (invenItemsOnly === true ? (inventory.name, console.log("fetching data with inven items" + inventory.name)) : [])});
-    const results = data ? data.results : [] ;
+    const queryData = ranking === '' && searchData ? searchData.results : ingredientsData.data;
+    const results = queryData ? queryData : [];
 
     const [recipeId, setRecipeId] = useState('');
     const { data: recipeData } = useGetRecipeInfoQuery({ id: recipeId }, {skip: !recipeId});
@@ -108,9 +111,16 @@ export default function RecipesPage() {
         }
     }
 
-    function inventoryItemsOnly() {
-        var inventoryOnly = document.getElementById('invenOnly');
-        inventoryOnly.checked ? setInvenItemsOnly(true) : setInvenItemsOnly(false);
+    function maximiseInventoryItemsOnly() {
+        var maximiseInventoryOnly = document.getElementById('availIng');
+        maximiseInventoryOnly.checked ? setRanking('1') : setRanking([]);
+        console.log("handling Inventory items only");
+    }
+
+    function minimiseMissingIng() {
+        var minimiseMissingIngCheckbox = document.getElementById('minimisingMissingIng');
+        minimiseMissingIngCheckbox ? setRanking('2') : setRanking('1');
+        console.log("ranking is: " + ranking)
     }
 
     return (
@@ -129,21 +139,22 @@ export default function RecipesPage() {
                         {dropDown == true ? 
                             <DropDownContainer>
                                 <FiltersContainer>
-                                    <CheckBoxes type='checkbox' id="invenOnly" onClick={inventoryItemsOnly}/>
-                                    <CheckBoxTitle>Available ingredients recipes only</CheckBoxTitle>
+                                    <CheckBoxes type='checkbox' id="availIng" onClick={maximiseInventoryItemsOnly}/>
+                                    <CheckBoxTitle>Use available ingredients</CheckBoxTitle>
                                 </FiltersContainer>
                                 <FiltersContainer>
-                                    <CheckBoxes type='checkbox' />
-                                    <CheckBoxTitle>filter 1</CheckBoxTitle>
+                                    <CheckBoxes type='checkbox' id="minimiseMissingIng" onClick={minimiseMissingIng}/>
+                                    <CheckBoxTitle>Minimise missing ingredients</CheckBoxTitle>
                                 </FiltersContainer>
-                                <FiltersContainer>
+                                {/* <FiltersContainer>
                                     <CheckBoxes type='checkbox' />
                                     <CheckBoxTitle>filter 2</CheckBoxTitle>
-                                </FiltersContainer>
+                                </FiltersContainer> */}
                             </DropDownContainer>
                         : []}
 
                         <RecipeLayout results={results} updateRecipeMenu={updateRecipeMenu}/>
+
                     </Recipe>
 
                     {isRecipeOpen && recipeMenuData &&
@@ -171,7 +182,8 @@ const RecipeLayout = ({ results, updateRecipeMenu }) => {
 
     return( 
         <RecipesContainer>
-            {results === null ? <p>No results were found...</p> : results.map(({title, image, id}) => {
+            {console.log(results)}
+            {Array.isArray(results) ? results.map(({title, image, id}) => {
                 return(
                     <RecipeGrid 
                         title={title} 
@@ -181,7 +193,7 @@ const RecipeLayout = ({ results, updateRecipeMenu }) => {
                         onClick={(e) => {handleRecipeMenu(id, e)}}
                     />
                 )
-            })}
+            }) : <p>No results were found...</p>}
         </RecipesContainer>
     )
 }

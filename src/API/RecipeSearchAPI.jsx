@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { useSelector } from 'react-redux'
 
 const apiKey = '2595d0356c9249378e7ae892d1368b16'
 
@@ -8,16 +9,19 @@ export const recipeSearchApi = createApi({
     baseQuery: fetchBaseQuery({baseUrl: 'https://api.spoonacular.com/recipes/'}),
     keepUnusedDataFor: 120,
     endpoints: (builder) => ({
-        getRecipesByIng: builder.query({
-            query: ({ searchQuery, ingredients }) => ({
-                url: "complexSearch",
-                params: {
-                    apiKey,
-                    query: searchQuery,
-                    includeIngredients: {ingredients},
-                    number: 100,
-                }
-            }),
+        getRecipesBySearch: builder.query({
+            query: ({ searchQuery /*, ingredients */ }) => {
+                // const incIngredients = Array.isArray(ingredients) ? ingredients.join() : '';
+                return {
+                    url: "complexSearch",
+                    params: {
+                        apiKey,
+                        query: searchQuery,
+                        // includeIngredients: incIngredients,
+                        number: 100,
+                    },
+                };
+            },
         }),
         getRecipesByNutrients: builder.query({
             query: ({ ingredients }) => ({
@@ -25,6 +29,18 @@ export const recipeSearchApi = createApi({
                 params:{
                     apiKey,
                     ingredients: ingredients,
+                }
+            })
+        }),
+        getRecipesByIngredients: builder.query({
+            query: ({ ingredients, ranking }) => ({
+                url: 'findByIngredients',
+                params: {
+                    apiKey,
+                    number: 100,
+                    ingredients: ingredients,
+                    ranking: ranking,
+                    ignorePantry: true,
                 }
             })
         }),
@@ -41,4 +57,4 @@ export const recipeSearchApi = createApi({
     }),
 });
 
-export const { useGetRecipesByIngQuery, useGetRecipeInfoQuery } = recipeSearchApi
+export const { useGetRecipesBySearchQuery, useGetRecipeInfoQuery, useGetRecipesByIngredientsQuery } = recipeSearchApi
