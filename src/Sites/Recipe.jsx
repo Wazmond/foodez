@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 
 const RecipeContainer = styled.div`
     height: 100%;
-    background-color: #0077ff;
+    background-color: #31ca57;
     display: flex;
     justify-content : flex-end;
 `;
