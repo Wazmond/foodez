@@ -5,10 +5,12 @@ import { FLUSH, REGISTER, PAUSE, PERSIST, PURGE, REHYDRATE, persistReducer, pers
 import { recipeSearchApi } from '../API/RecipeSearchAPI'
 import recipePageStateSlice from '../API/Slices/RecipesSlice'
 import RecipeMenuSlice from '../API/Slices/RecipeMenuSlice'
+import macroLogSlice from '../API/Slices/MacroLogSlice'
 
 const pReducers = combineReducers({
     invenReducer,
-    recipePageState: recipePageStateSlice
+    recipePageState: recipePageStateSlice,
+    macroLogSlice: macroLogSlice
 })
 
 // const reducers = combineReducers({
