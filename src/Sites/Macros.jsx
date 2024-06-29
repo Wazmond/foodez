@@ -1,6 +1,11 @@
 import styled from 'styled-components'
 import CircularProgression from './DashboardPage/CircularProgression';
 import addImg from '../Images/plus-img.png'
+import { addLog } from '../API/Slices/MacroLogSlice';
+import { useEffect, useState } from 'react';
+import AddMenu from './MacroPage/AddMenu.jsx';
+
+
 
 const Background = styled.div`
     background-color: #f0f0f0;
@@ -27,7 +32,7 @@ const SummaryContainer = styled.div`
     flex-direction: row;
     justify-content: space-around;
 
-    margin-bottom: auto;
+    margin-bottom: 25px;
 `;
 const SummaryHeadings = styled.h2`
     font-size: 18px;
@@ -42,24 +47,33 @@ const SummarySeparator = styled.div`
 const MealTrackContainer = styled.div`
     /* box-shadow: 0 5px 15px #686868; */
     background-color: white;
+    height: 100%;
     border-radius: 7px;
     padding: 25px;
     display: flex;
     flex-direction: column;
     align-items: center;
 `;
-const MealTrackHeader = styled.h2`
-    text-align: center;
+const TitleButtonContainer = styled.div`
+    display: flex;
+    flex-direction: row;
     margin-bottom: 15px;
+
+    position: relative;
+
+    height: 30px;
+    width: 100%;
 `;
 
-const DividerLine = styled.div`
-    width: 80%;
-    height: 0px;
-    border: 1px solid grey;
-    margin: 0 auto;
+const MealTrackHeader = styled.h2`
+    font-size: 24px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 `;
+
 const AddButton = styled.button`
+    margin-left: auto;
     border: none;
     background-color: white;
     :hover {
@@ -68,11 +82,46 @@ const AddButton = styled.button`
 `;
 
 const AddImage = styled.img`
+    height: 100%;
+`;
+
+const DividerLine = styled.div`
+    width: 80%;
+    height: 0px;
+    border: 1px solid grey;
+    margin: 0 auto 15px;
+`;
+
+const LogEntryContainer = styled.div`
+    display: flex; 
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+`;
+
+const AltContainer = styled.div`
+    display: flex; 
+    flex-direction: row;
     height: 25px;
-    width: 25px;
+    align-self: center;
+`;
+
+const AltText = styled.p`
+    color: #929292;
+    font-size: 18px;
 `;
 
 export default function Macros() {
+    const [addMenuState, setAddMenuState] = useState(false);
+    
+    // useEffect({
+
+    // }, [setAddMenu]) 
+    function handleAddButton() {
+        console.log('Handling addbutton press');
+        setAddMenuState(!addMenuState);
+        console.log(addMenuState);
+    };
 
     return(
         <Background>
@@ -95,22 +144,22 @@ export default function Macros() {
                     <SummaryHeadings>Carbohydrates</SummaryHeadings>
                 </SummarySeparator>
             </SummaryContainer>
+
             <MealTrackContainer>
-                <MealTrackHeader>FOOD LOG</MealTrackHeader>
+                <TitleButtonContainer>
+                    <MealTrackHeader>FOOD LOG</MealTrackHeader>
+                    <AddButton onClick={handleAddButton}><AddImage src={addImg} /></AddButton>
+                </TitleButtonContainer>
                 <DividerLine />
-
-                <AddButton><AddImage src={addImg} /></AddButton>
-
+                <LogEntryContainer>
+                    {addMenuState ? 
+                        <AddMenu /> :
+                        <AltContainer>
+                            <AltText>No nutritional entries for today yet...</AltText>
+                        </AltContainer>
+                    }
+                </LogEntryContainer>
             </MealTrackContainer>
         </Background>
     )
 }
-
-const foodData = [{
-    title: '',          
-    mealType: '',
-    calories: '',
-    protein: '',
-    fats: '',
-    carbohydrates: '',
-}];
