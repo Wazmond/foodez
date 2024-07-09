@@ -13,7 +13,7 @@ const macroLogSlice = createSlice({
     name: 'macroLogSlice',
     initialState,
     reducers: {
-        addLog(state, { title, mealType, calories, protein, fats, carbohydrates }) {
+        addLog({ title, mealType, calories, protein, fats, carbohydrates }) {
             return {
                 ...state,
                 title,

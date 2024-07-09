@@ -56,15 +56,11 @@ const MissingMessage = styled.h2`
     text-align: center;
 `;
 const List = styled.ul`
-    /* text-align: center; */
     display: flex;
-    /* border: 2px solid black; */
     flex-flow: wrap;
-    /* padding: 0; */
     list-style: none;
 `;
 const ListContent = styled.li`
-    /* border: 2px solid red; */
     font-style: italic;
     flex: 0 0 33.3333%;
     text-align: center;
@@ -80,7 +76,7 @@ export default function AddMenu() {
     const [totalCalories, setTotalCalories] = useState('');
     const [missingStatus, setMissingStatus] = useState(false);
     const [submitCount, setSubmitCount] = useState('0');
-    const payload = [title, mealType, calories, protein, fats, carbohydrates];
+    // const payload = [title, mealType, calories, protein, fats, carbohydrates];
 
     const HandleCalorieCalculator = (e) => {
         e.preventDefault();
@@ -106,10 +102,14 @@ export default function AddMenu() {
     }
 
     const HandleSubmitButton = (e) => {
-        console.log("HandlingSubmitButton")
-        e.preventDefault()
-        submitCount < 1 ? setSubmitCount(submitCount + 1) : addLog(payload)
-        setMissingStatus(true)
+        console.log("HandlingSubmitButton");
+        e.preventDefault();
+        submitCount < 1 ? setSubmitCount(submitCount + 1) : (
+            addLog({title, mealType, calories, protein, fats, carbohydrates}), 
+            console.log("adding log to persist")
+
+        );
+        setMissingStatus(true);
     }
 
     return( 
