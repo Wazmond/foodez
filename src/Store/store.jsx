@@ -10,28 +10,22 @@ import macroLogSlice from '../API/Slices/MacroLogSlice'
 const pReducers = combineReducers({
     invenReducer,
     recipePageState: recipePageStateSlice,
-    macroLogSlice: macroLogSlice
+    macroLog: macroLogSlice
 })
-
-// const reducers = combineReducers({
-//  
-//     RecipeMenuSlice
-// })
 
 const persistConfig = {
     key: 'root',
     version: 1,
     storage,
-    blacklist: [recipeSearchApi],
+    blacklist: ['recipeSearchApi'],
 }
 
-const persistedReducer = persistReducer(persistConfig, pReducers)
+const persistedReducer = persistReducer(persistConfig, pReducers);
 
 
 export const store = configureStore({
     reducer: { 
         persistedReducer,
-        // RecipeMenuSlice,
         [recipeSearchApi.reducerPath]: recipeSearchApi.reducer,
     }, 
     middleware: (getDefaultMiddleware) =>

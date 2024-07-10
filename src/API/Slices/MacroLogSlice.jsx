@@ -1,28 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    title: '',          
-    mealType: '',
-    calories: '',
-    protein: '',
-    fats: '',
-    carbohydrates: '',
-}
+    logs: [],
+};
 
 const macroLogSlice = createSlice({
     name: 'macroLogSlice',
     initialState,
     reducers: {
-        addLog({ title, mealType, calories, protein, fats, carbohydrates }) {
-            return {
-                ...state,
-                title,
-                mealType,
-                calories,
-                protein,
-                fats,
-                carbohydrates
-            }
+        addLog(state, action) {
+            state.logs.push(action.payload);
+
         }
     },
 })
