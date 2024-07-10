@@ -113,10 +113,7 @@ const AltText = styled.p`
 
 export default function Macros() {
     const [addMenuState, setAddMenuState] = useState(false);
-    
-    // useEffect({
 
-    // }, [setAddMenu]) 
     function handleAddButton() {
         console.log('Handling addbutton press');
         setAddMenuState(!addMenuState);
@@ -153,7 +150,8 @@ export default function Macros() {
                 <DividerLine />
                 <LogEntryContainer>
                     {addMenuState ? 
-                        <AddMenu /> :
+                        <AddMenu setAddMenuState={setAddMenuState}/> 
+                        :
                         <AltContainer>
                             <AltText>No nutritional entries for today yet...</AltText>
                         </AltContainer>

@@ -221,7 +221,7 @@ const ListContent = styled.li`
     text-align: center;
 `;
 
-export default function AddMenu() {
+export default function AddMenu({setAddMenuState}) {
     const dispatch = useDispatch();
 
     const [title, setTitle] = useState('');
@@ -262,26 +262,22 @@ export default function AddMenu() {
         e.preventDefault();
 
         const fieldsFilled = title && mealType && calories && protein && fats && carbohydrates;
-
+        setPayload({
+            title,
+            mealType,
+            calories,
+            protein,
+            fats,
+            carbohydrates
+        });
         if (!fieldsFilled) {
             setMissingStatus(true);
         } else {
             setMissingStatus(false);
-            setPayload({
-                title,
-                mealType,
-                calories,
-                protein,
-                fats,
-                carbohydrates
-            });
-            console.log(payload);
-            if (submitCount < 1) {
-                setSubmitCount(submitCount + 1);
-            } else {
-                dispatch(addLog(payload));
-                console.log("adding log to persist");
-            }
+            payload && dispatch(addLog(payload));
+            console.log("adding log to persist");
+            setAddMenuState(false);
+            delayedMenuClose;
         }
     }
 
