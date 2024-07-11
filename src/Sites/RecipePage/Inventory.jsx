@@ -81,14 +81,14 @@ export default function Inventory() {
 
     const inventoryList = () => {
         const items = useSelector(state => state.persistedReducer.invenReducer.inventory)
-        const itemsList = Array.isArray(items) ? items.map((item) => {
+        const itemsList = Array.isArray(items) && items.map((item) => {
             return (
                 <InventoryResultSpan key={item.id}>
                     <InventoryResult >{item.name}</InventoryResult>
                     <ClearItem onClick={() => handleRmItem(item)}>X</ClearItem>
                 </InventoryResultSpan>
             );
-        }) : [];
+        });
         return (
             <PantryInventory>{itemsList}</PantryInventory>
         )

@@ -4,6 +4,8 @@ import addImg from '../Images/plus-img.png'
 import { addLog } from '../API/Slices/MacroLogSlice';
 import { useEffect, useState } from 'react';
 import AddMenu from './MacroPage/AddMenu.jsx';
+import { useSelector } from 'react-redux';
+import Logs from './MacroPage/Logs.jsx';
 
 
 
@@ -113,6 +115,8 @@ const AltText = styled.p`
 
 export default function Macros() {
     const [addMenuState, setAddMenuState] = useState(false);
+    const loggedItems = useSelector(state => state.persistedReducer.macroLog.logs);
+    const logsList = Array.isArray(loggedItems);
 
     function handleAddButton() {
         console.log('Handling addbutton press');
@@ -150,11 +154,14 @@ export default function Macros() {
                 <DividerLine />
                 <LogEntryContainer>
                     {addMenuState ? 
-                        <AddMenu setAddMenuState={setAddMenuState}/> 
+                        <Add Menu setAddMenuState={setAddMenuState}/> 
                         :
-                        <AltContainer>
-                            <AltText>No nutritional entries for today yet...</AltText>
-                        </AltContainer>
+                        (logsList ?
+                            <Logs /> :
+                            <AltContainer>
+                                <AltText>No nutritional entries for today yet...</AltText>
+                            </AltContainer>
+                        )
                     }
                 </LogEntryContainer>
             </MealTrackContainer>

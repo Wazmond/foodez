@@ -11,9 +11,12 @@ const macroLogSlice = createSlice({
         addLog(state, action) {
             state.logs.push(action.payload);
 
+        },
+        rmLog(state, action) {
+            state.logs = state.logs.filter((log) => log.title !== action.payload.title);
         }
     },
 })
 
-export const { addLog } = macroLogSlice.actions
+export const { addLog, rmLog } = macroLogSlice.actions
 export default macroLogSlice.reducer
