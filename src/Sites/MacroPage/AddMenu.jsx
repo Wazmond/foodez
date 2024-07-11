@@ -231,9 +231,6 @@ export default function AddMenu({setAddMenuState}) {
     const [fats, setFats] = useState('');
     const [carbohydrates, setCarbohydrates] = useState('');
     const [missingStatus, setMissingStatus] = useState(false);
-    const [submitCount, setSubmitCount] = useState(0);
-    const [payload, setPayload] = useState([]);
-
 
     const handleCalorieCalculator = (e) => {
         e.preventDefault();
@@ -262,14 +259,14 @@ export default function AddMenu({setAddMenuState}) {
         e.preventDefault();
 
         const fieldsFilled = title && mealType && calories && protein && fats && carbohydrates;
-        setPayload({
+        const payload = {
             title,
             mealType,
             calories,
             protein,
             fats,
             carbohydrates
-        });
+        };
         if (!fieldsFilled) {
             setMissingStatus(true);
         } else {
@@ -277,7 +274,6 @@ export default function AddMenu({setAddMenuState}) {
             payload && dispatch(addLog(payload));
             console.log("adding log to persist");
             setAddMenuState(false);
-            delayedMenuClose;
         }
     }
 

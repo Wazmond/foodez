@@ -154,7 +154,7 @@ export default function Macros() {
                 <DividerLine />
                 <LogEntryContainer>
                     {addMenuState ? 
-                        <Add Menu setAddMenuState={setAddMenuState}/> 
+                        <AddMenu setAddMenuState={setAddMenuState}/> 
                         :
                         (logsList ?
                             <Logs /> :
