@@ -224,6 +224,7 @@ const ListContent = styled.li`
 export default function AddMenu({setAddMenuState}) {
     const dispatch = useDispatch();
 
+    // const [id, setId] = useState('');
     const [title, setTitle] = useState('');
     const [mealType, setMealType] = useState('');
     const [calories, setCalories] = useState('');
@@ -253,13 +254,43 @@ export default function AddMenu({setAddMenuState}) {
                 </List>
             </MissingFieldsContainer>
         )
-    }
+    };
+    const getId = () => {
+        const date = new Date();
+
+        const day = () => {
+            let DD = date.getDate();
+            DD = DD < 10 ? '0' + DD : DD;
+            return DD;
+        }
+        const month = () => {
+            let MM = date.getMonth() + 1;
+            MM = MM < 10 ? '0' + MM : MM;
+            return MM;
+        };
+        const year = date.getFullYear();
+        const hours = () => {
+            let hh = date.getHours();
+            hh = hh < 10 ? '0' + hh : hh;
+            return hh;
+        };
+        const minutes = () => {
+            let mm = date.getMinutes();
+            mm = mm < 10 ? '0' + mm : mm;
+            return mm;
+        };
+
+        const currentTime = day() + "" +  month() + "" + year + "" + hours() + "" + minutes();
+        return currentTime;
+    };
 
     const handleSubmitButton = (e) => {
         e.preventDefault();
-
+        const id = getId();
+    
         const fieldsFilled = title && mealType && calories && protein && fats && carbohydrates;
         const payload = {
+            id,
             title,
             mealType,
             calories,
