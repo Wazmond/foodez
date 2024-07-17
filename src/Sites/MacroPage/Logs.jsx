@@ -58,7 +58,7 @@ export default function Logs() {
     console.log("Logs should be open");
 
     function handleRmItem(logs) {
-        console.log("removing item: " + logs.title);
+        console.log("removing item: " + logs.id);
         dispatch(rmLog(logs));
     }
 

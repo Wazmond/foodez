@@ -13,7 +13,7 @@ const macroLogSlice = createSlice({
 
         },
         rmLog(state, action) {
-            state.logs = state.logs.filter((log) => log.title !== action.payload.title);
+            state.logs = state.logs.filter((log) => log.id !== action.payload.id);
         }
     },
 })
