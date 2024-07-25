@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import AddMenu from './MacroPage/AddMenu.jsx';
 import { useSelector } from 'react-redux';
 import Logs from './MacroPage/Logs.jsx';
+import SetGoalMenu from './MacroPage/SetGoalMenu.jsx';
 
 
 
@@ -27,14 +28,14 @@ const Background = styled.div`
 `;
 
 const SummaryContainer = styled.div`
-    /* box-shadow: 0 5px 15px #686868; */
     background-color: white;
     border-radius: 7px;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-
+    padding: 10px 15px;
+    width: 100%;
     margin-bottom: 25px;
+
 `;
 const SummaryHeadings = styled.h2`
     font-size: 18px;
@@ -43,7 +44,10 @@ const SummaryHeadings = styled.h2`
 `;
 const SummarySeparator = styled.div`
     flex-direction: column;
-    margin: 10px 15px;
+    margin: 0 auto;
+    .ss4{
+        margin: 0 calc(auto - 40px);
+    }
 `;
 
 const MealTrackContainer = styled.div`
@@ -75,11 +79,21 @@ const MealTrackHeader = styled.h2`
 `;
 
 const AddButton = styled.button`
-    margin-left: auto;
     border: none;
     background-color: white;
     :hover {
         cursor: pointer;
+    }
+
+    &.aFoodLog {
+        margin-left: auto;
+    }
+
+    &.nGoal {
+        height: 25px;
+        width: 25px;
+        /* position: absolute; */
+        margin-top: 10px;
     }
 `;
 
@@ -115,41 +129,48 @@ const AltText = styled.p`
 
 export default function Macros() {
     const [addMenuState, setAddMenuState] = useState(false);
+    const [goalState, setGoalState] = useState(false);
     const loggedItems = useSelector(state => state.persistedReducer.macroLog.logs);
     const logsList = Array.isArray(loggedItems);
 
     function handleAddButton() {
-        console.log('Handling addbutton press');
+        console.log('Handling add button press');
         setAddMenuState(!addMenuState);
         console.log(addMenuState);
     };
 
+    function handleNGoal() {
+        console.log('Handling add Goal Button');
+        setGoalState(!goalState);
+    };
     return(
         <Background>
             <h1>NUTRITIONAL DATA FOR TODAY</h1>
             <SummaryContainer>
-                <SummarySeparator>
+                <SummarySeparator className='ss0'>
                     <CircularProgression percentage={50} colour="#ff0000" />
                     <SummaryHeadings>Calories</SummaryHeadings>
                 </SummarySeparator>    
-                <SummarySeparator>
+                <SummarySeparator className='ss1'>
                     <CircularProgression percentage={50} colour="#ff0000" />
                     <SummaryHeadings>Protein</SummaryHeadings>
                 </SummarySeparator>
-                <SummarySeparator>
+                <SummarySeparator className='ss2'>
                     <CircularProgression percentage={50} colour="#ff0000" />
                     <SummaryHeadings>Fats</SummaryHeadings>
                 </SummarySeparator>
-                <SummarySeparator>
+                <SummarySeparator className='ss3'>
                     <CircularProgression percentage={50} colour="#ff0000" />
                     <SummaryHeadings>Carbohydrates</SummaryHeadings>
                 </SummarySeparator>
+
+                <AddButton className="nGoal" onClick={handleNGoal}><AddImage src={addImg} /></AddButton>
             </SummaryContainer>
 
             <MealTrackContainer>
                 <TitleButtonContainer>
                     <MealTrackHeader>FOOD LOG</MealTrackHeader>
-                    <AddButton onClick={handleAddButton}><AddImage src={addImg} /></AddButton>
+                    <AddButton className="aFoodLog" onClick={handleAddButton}><AddImage src={addImg} /></AddButton>
                 </TitleButtonContainer>
                 <DividerLine />
                 <LogEntryContainer>
@@ -165,6 +186,9 @@ export default function Macros() {
                     }
                 </LogEntryContainer>
             </MealTrackContainer>
+
+            {goalState && <SetGoalMenu setGoalState={setGoalState} />}
+            
         </Background>
     )
 }

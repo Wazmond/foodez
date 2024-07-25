@@ -6,11 +6,13 @@ import { recipeSearchApi } from '../API/RecipeSearchAPI'
 import recipePageStateSlice from '../API/Slices/RecipesSlice'
 import RecipeMenuSlice from '../API/Slices/RecipeMenuSlice'
 import macroLogSlice from '../API/Slices/MacroLogSlice'
+import macroGoalSlice from '../API/Slices/MacroGoalSlice'
 
 const pReducers = combineReducers({
     invenReducer,
     recipePageState: recipePageStateSlice,
-    macroLog: macroLogSlice
+    macroLog: macroLogSlice,
+    macroGoal: macroGoalSlice
 })
 
 const persistConfig = {

@@ -1,7 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    logs: [],
+    Calories: 0,
+    Proteins: 0,
+    Fats: 0,
+    Carbohydrates: 0,
 };
 
 const macroLogSlice = createSlice({
