@@ -17,9 +17,9 @@ const Background = styled.div`
     border-radius: 7px;
     font-family: roboto-regular;
     padding: 25px;
-
     display: flex;
     flex-direction: column;
+    position: relative;
 
     h1 {
         text-align: center;
@@ -188,7 +188,7 @@ export default function Macros() {
             </MealTrackContainer>
 
             {goalState && <SetGoalMenu setGoalState={setGoalState} />}
-            
+
         </Background>
     )
 }
