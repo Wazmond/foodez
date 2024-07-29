@@ -1,9 +1,13 @@
 {
   "name": "foodez",
+  "homepage": "https://wazmond.github.io/foodez",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
+    "publish": "publish-to-git",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
@@ -12,7 +16,9 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.5",
     "chart.js": "^4.4.3",
+    "gh-pages": "^6.1.1",
     "prettier": "^3.2.5",
+    "publish-to-git": "^1.1.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^9.1.2",
