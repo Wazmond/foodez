@@ -19,7 +19,7 @@ const Main = styled.div`
 const Root = () => {
     return(
         <Container>
-          <Sidebar/>
+          <Sidebar />
           <Main>
             <Outlet />
           </Main>       
