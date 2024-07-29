@@ -2,7 +2,7 @@ import styled from "styled-components"
 import { setGoal } from "../../API/Slices/MacroGoalSlice";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-
+import addButton from '../../Images/plus-img.png'
 
 const Background = styled.div`
     width: calc(100vw - (225px + 80px));
@@ -27,7 +27,23 @@ const GoalMenuPage = styled.div`
 
 `;
 
+const TitleContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    padding-left: 25px;
+`;
+
+const ExitButton = styled.img`
+    height: 25px;
+    width: 25px;
+    transform: rotate(45deg);
+    &:hover {
+        cursor: pointer;
+    }
+`;
+
 const Title = styled.h2`
+    margin: 0 auto;
     margin-bottom: 25px;
     text-align: center;
 `;
@@ -69,16 +85,19 @@ export default function SetGoalMenu({ setGoalState }) {
     const dispatch = useDispatch();
     const ref = useRef(null);
 
+    const handleExitMenu = (e) => {
+          setGoalState(false);
+      };
+
     useEffect(() => {
-        const handleExitMenu = (e) => {
-          if (ref.current && !ref.current.contains(e.target)) {
-            setGoalState(false);
-          }
-        };
-    
-        document.addEventListener('mousedown', handleExitMenu);
+        const exitMenu = (e) => {
+            if (ref.current && !ref.current.contains(e.target)) {
+                handleExitMenu();
+            }
+        }
+        document.addEventListener('mousedown', exitMenu);
         return () => {
-          document.removeEventListener('mousedown', handleExitMenu);
+          document.removeEventListener('mousedown', exitMenu);
         };
       }, [setGoalState]);
 
@@ -96,7 +115,10 @@ export default function SetGoalMenu({ setGoalState }) {
     return( 
         <Background >
             <GoalMenuPage ref={ref}>
-                <Title>Goal Setting</Title>
+                <TitleContainer>
+                    <Title>Goal Setting</Title>
+                    <ExitButton src={addButton} onClick={handleExitMenu}/>
+                </TitleContainer>
                 <CatSpans>
                     <Category className="calories" >Calories:</Category>             <CategoryInput value={calories} onChange={(e) => setCalories(e.target.value)}/>
                 </CatSpans>

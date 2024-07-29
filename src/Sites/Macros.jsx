@@ -42,6 +42,12 @@ const SummaryHeadings = styled.h2`
     text-align: center;
     margin-top: 5px;
 `;
+const SummaryGoals = styled.h2`
+    font-size: 18px;
+    text-align: center;
+    margin-top: 5px;
+`;
+
 const SummarySeparator = styled.div`
     flex-direction: column;
     margin: 0 auto;
@@ -130,8 +136,8 @@ const AltText = styled.p`
 export default function Macros() {
     const [addMenuState, setAddMenuState] = useState(false);
     const [goalState, setGoalState] = useState(false);
-    const loggedItems = useSelector(state => state.persistedReducer.macroLog.logs);
-    const logsList = Array.isArray(loggedItems);
+    const logsList = Array.isArray(useSelector(state => state.persistedReducer.macroLog.logs));
+    const goals = useSelector(state => state.persistedReducer.macroGoal.goal);
 
     function handleAddButton() {
         console.log('Handling add button press');
@@ -143,6 +149,7 @@ export default function Macros() {
         console.log('Handling add Goal Button');
         setGoalState(!goalState);
     };
+    
     return(
         <Background>
             <h1>NUTRITIONAL DATA FOR TODAY</h1>
@@ -150,18 +157,22 @@ export default function Macros() {
                 <SummarySeparator className='ss0'>
                     <CircularProgression percentage={50} colour="#ff0000" />
                     <SummaryHeadings>Calories</SummaryHeadings>
+                    <SummaryGoals>{goals.calories} kcal</SummaryGoals>
                 </SummarySeparator>    
                 <SummarySeparator className='ss1'>
                     <CircularProgression percentage={50} colour="#ff0000" />
                     <SummaryHeadings>Protein</SummaryHeadings>
+                    <SummaryGoals>{goals.proteins} g</SummaryGoals>
                 </SummarySeparator>
                 <SummarySeparator className='ss2'>
                     <CircularProgression percentage={50} colour="#ff0000" />
                     <SummaryHeadings>Fats</SummaryHeadings>
+                    <SummaryGoals>{goals.fats} g</SummaryGoals>
                 </SummarySeparator>
                 <SummarySeparator className='ss3'>
                     <CircularProgression percentage={50} colour="#ff0000" />
                     <SummaryHeadings>Carbohydrates</SummaryHeadings>
+                    <SummaryGoals>{goals.carbs} g</SummaryGoals>
                 </SummarySeparator>
 
                 <AddButton className="nGoal" onClick={handleNGoal}><AddImage src={addImg} /></AddButton>
