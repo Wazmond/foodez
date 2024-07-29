@@ -64,7 +64,7 @@ const Logo = styled.img`
 `;
 
 
-function Sidebar() {
+export default function Sidebar() {
     const redirect = useNavigate();
 
     return(
@@ -94,4 +94,3 @@ function Sidebar() {
         </SidebarContainer>
     );
 };
-export default Sidebar
